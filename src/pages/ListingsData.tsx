@@ -45,10 +45,20 @@ const ListingsData = () => {
   const [selectedRooms, setSelectedRooms] = useState("all");
   const [selectedCondition, setSelectedCondition] = useState("all");
   const [minYear, setMinYear] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Get search from URL on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const search = params.get('search');
+    if (search) {
+      setSearchQuery(search);
+    }
+  }, []);
 
   useEffect(() => {
     fetchProperties();
-  }, [selectedCity, selectedType, sortBy, selectedRooms, selectedCondition, minYear]);
+  }, [selectedCity, selectedType, sortBy, selectedRooms, selectedCondition, minYear, searchQuery]);
 
   const fetchProperties = async () => {
     setLoading(true);
@@ -78,6 +88,11 @@ const ListingsData = () => {
 
     if (minYear) {
       query = query.gte('building_year', parseInt(minYear));
+    }
+
+    // Apply search query
+    if (searchQuery) {
+      query = query.or(`city.ilike.%${searchQuery}%,district.ilike.%${searchQuery}%,property_type.ilike.%${searchQuery}%,title.ilike.%${searchQuery}%`);
     }
 
     // Apply sorting
@@ -113,7 +128,9 @@ const ListingsData = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">Property Listings</h1>
-          <p className="text-muted-foreground">Browse all available properties across Ukrainian cities</p>
+          <p className="text-muted-foreground">
+            {searchQuery ? `Search results for "${searchQuery}"` : 'Browse all available properties across Ukrainian cities'}
+          </p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
