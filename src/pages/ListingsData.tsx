@@ -51,8 +51,21 @@ const ListingsData = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const search = params.get('search');
+    const city = params.get('city');
+    const type = params.get('type');
+    const maxPrice = params.get('maxPrice');
+    
     if (search) {
       setSearchQuery(search);
+    }
+    if (city) {
+      setSelectedCity(city);
+    }
+    if (type) {
+      setSelectedType(type);
+    }
+    if (maxPrice) {
+      setPriceRange([0, parseInt(maxPrice)]);
     }
   }, []);
 
@@ -121,6 +134,19 @@ const ListingsData = () => {
   const applyFilters = () => {
     fetchProperties();
     setShowFilters(false);
+  };
+
+  const resetFilters = () => {
+    setSelectedCity("all");
+    setSelectedType("all");
+    setSelectedRooms("all");
+    setSelectedCondition("all");
+    setMinYear("");
+    setPriceRange([0, 20000000]);
+    setSearchQuery("");
+    
+    // Clear URL parameters
+    window.history.replaceState({}, '', '/listings');
   };
 
   return (
@@ -241,7 +267,10 @@ const ListingsData = () => {
                     />
                   </div>
                   
-                  <Button className="w-full" onClick={applyFilters}>Apply Filters</Button>
+                  <div className="flex gap-2">
+                    <Button className="flex-1" onClick={applyFilters}>Apply Filters</Button>
+                    <Button variant="outline" onClick={resetFilters}>Reset</Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
