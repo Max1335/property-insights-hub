@@ -5,10 +5,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Check, X, Users, Building2, Eye } from "lucide-react";
+import { Check, X, Users, Building2, Eye, Trash2 } from "lucide-react";
 
 interface PendingProperty {
   id: string;
@@ -88,8 +89,7 @@ const AdminPanel = () => {
     const { data, error } = await supabase
       .from('profiles')
       .select('id, email, full_name, created_at')
-      .order('created_at', { ascending: false })
-      .limit(20);
+      .order('created_at', { ascending: false });
 
     if (!error && data) {
       // Fetch roles separately
@@ -130,6 +130,38 @@ const AdminPanel = () => {
       toast.error("Failed to update property");
     } else {
       toast.success(action === 'active' ? "Property approved" : "Property rejected");
+      fetchData();
+    }
+  };
+
+  const handleDeleteUser = async (userId: string) => {
+    if (!confirm("Are you sure you want to delete this user? This will remove all their data.")) {
+      return;
+    }
+
+    const { error } = await supabase.rpc('delete_user', { user_id: userId });
+
+    if (error) {
+      toast.error("Failed to delete user: " + error.message);
+    } else {
+      toast.success("User deleted successfully");
+      fetchData();
+    }
+  };
+
+  const handleRoleChange = async (userId: string, newRole: string) => {
+    // Delete existing roles
+    await supabase.from('user_roles').delete().eq('user_id', userId);
+    
+    // Insert new role
+    const { error } = await supabase
+      .from('user_roles')
+      .insert([{ user_id: userId, role: newRole as any }]);
+
+    if (error) {
+      toast.error("Failed to update role");
+    } else {
+      toast.success("Role updated successfully");
       fetchData();
     }
   };
@@ -250,17 +282,43 @@ const AdminPanel = () => {
 
           <TabsContent value="users" className="space-y-4">
             <Card>
+              <CardHeader>
+                <CardTitle>All Registered Users</CardTitle>
+                <CardDescription>Manage user accounts and roles</CardDescription>
+              </CardHeader>
               <CardContent className="p-6">
                 <div className="space-y-4">
                   {users.map((user) => (
                     <div key={user.id} className="flex items-center justify-between border-b pb-4 last:border-0">
-                      <div>
+                      <div className="flex-1">
                         <p className="font-medium">{user.full_name || user.email}</p>
                         <p className="text-sm text-muted-foreground">{user.email}</p>
+                        <p className="text-xs text-muted-foreground">
+                          Joined: {new Date(user.created_at).toLocaleDateString()}
+                        </p>
                       </div>
-                      <Badge variant="secondary">
-                        {user.user_roles[0]?.role || 'user'}
-                      </Badge>
+                      <div className="flex items-center gap-2">
+                        <Select
+                          value={user.user_roles[0]?.role || 'user'}
+                          onValueChange={(value) => handleRoleChange(user.id, value)}
+                        >
+                          <SelectTrigger className="w-[120px]">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="user">User</SelectItem>
+                            <SelectItem value="realtor">Realtor</SelectItem>
+                            <SelectItem value="admin">Admin</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          onClick={() => handleDeleteUser(user.id)}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </div>
                   ))}
                 </div>
