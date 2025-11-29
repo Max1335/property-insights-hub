@@ -180,14 +180,14 @@ const AdminPanel = () => {
     <Layout>
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-display font-bold mb-2">Admin Panel</h1>
-          <p className="text-muted-foreground">Manage listings, users, and system settings</p>
+          <h1 className="text-3xl font-display font-bold mb-2">Панель адміністратора</h1>
+          <p className="text-muted-foreground">Керування оголошеннями, користувачами та налаштуваннями системи</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Total Properties</CardTitle>
+              <CardTitle className="text-sm font-medium">Всього оголошень</CardTitle>
               <Building2 className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -197,7 +197,7 @@ const AdminPanel = () => {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Active Listings</CardTitle>
+              <CardTitle className="text-sm font-medium">Активних оголошень</CardTitle>
               <Eye className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -207,7 +207,7 @@ const AdminPanel = () => {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+              <CardTitle className="text-sm font-medium">Всього користувачів</CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -219,16 +219,16 @@ const AdminPanel = () => {
         <Tabs defaultValue="pending" className="space-y-4">
           <TabsList>
             <TabsTrigger value="pending">
-              Pending Approval ({pendingProperties.length})
+              Очікують схвалення ({pendingProperties.length})
             </TabsTrigger>
-            <TabsTrigger value="users">Users</TabsTrigger>
+            <TabsTrigger value="users">Користувачі</TabsTrigger>
           </TabsList>
 
           <TabsContent value="pending" className="space-y-4">
             {pendingProperties.length === 0 ? (
               <Card>
                 <CardContent className="p-12 text-center">
-                  <p className="text-muted-foreground">No pending properties</p>
+                  <p className="text-muted-foreground">Немає оголошень, що очікують схвалення</p>
                 </CardContent>
               </Card>
             ) : (
@@ -239,7 +239,7 @@ const AdminPanel = () => {
                       <div>
                         <CardTitle>{property.title}</CardTitle>
                         <CardDescription>
-                          Submitted by {property.profiles?.full_name || property.profiles?.email}
+                          Подано користувачем {property.profiles?.full_name || property.profiles?.email}
                         </CardDescription>
                       </div>
                       <Badge>{property.property_type}</Badge>
@@ -249,10 +249,10 @@ const AdminPanel = () => {
                     <div className="flex items-center justify-between">
                       <div className="space-y-1">
                         <p className="text-sm text-muted-foreground">
-                          Price: ₴{property.price.toLocaleString()}
+                          Ціна: ₴{property.price.toLocaleString()}
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          Location: {property.city}
+                          Місто: {property.city}
                         </p>
                       </div>
                       <div className="flex gap-2">
@@ -262,7 +262,7 @@ const AdminPanel = () => {
                           onClick={() => handlePropertyAction(property.id, 'active')}
                         >
                           <Check className="h-4 w-4 mr-1" />
-                          Approve
+                          Схвалити
                         </Button>
                         <Button
                           size="sm"
@@ -270,7 +270,7 @@ const AdminPanel = () => {
                           onClick={() => handlePropertyAction(property.id, 'rejected')}
                         >
                           <X className="h-4 w-4 mr-1" />
-                          Reject
+                          Відхилити
                         </Button>
                       </div>
                     </div>
@@ -283,8 +283,8 @@ const AdminPanel = () => {
           <TabsContent value="users" className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>All Registered Users</CardTitle>
-                <CardDescription>Manage user accounts and roles</CardDescription>
+                <CardTitle>Всі зареєстровані користувачі</CardTitle>
+                <CardDescription>Керування обліковими записами та ролями користувачів</CardDescription>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="space-y-4">
@@ -294,7 +294,7 @@ const AdminPanel = () => {
                         <p className="font-medium">{user.full_name || user.email}</p>
                         <p className="text-sm text-muted-foreground">{user.email}</p>
                         <p className="text-xs text-muted-foreground">
-                          Joined: {new Date(user.created_at).toLocaleDateString()}
+                          Приєднався: {new Date(user.created_at).toLocaleDateString('uk-UA')}
                         </p>
                       </div>
                       <div className="flex items-center gap-2">
@@ -306,9 +306,9 @@ const AdminPanel = () => {
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="user">User</SelectItem>
-                            <SelectItem value="realtor">Realtor</SelectItem>
-                            <SelectItem value="admin">Admin</SelectItem>
+                            <SelectItem value="user">Користувач</SelectItem>
+                            <SelectItem value="realtor">Рієлтор</SelectItem>
+                            <SelectItem value="admin">Адміністратор</SelectItem>
                           </SelectContent>
                         </Select>
                         <Button

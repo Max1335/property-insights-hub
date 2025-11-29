@@ -99,7 +99,7 @@ const PropertyDetails = () => {
                 <div className="flex items-start justify-between">
                   <div>
                     <CardTitle className="text-2xl mb-2">{property.title}</CardTitle>
-                    <div className="flex items-center gap-2 text-muted-foreground">
+                  <div className="flex items-center gap-2 text-muted-foreground">
                       <MapPin className="h-4 w-4" />
                       <span>{property.address}, {property.district}, {property.city}</span>
                     </div>
@@ -115,40 +115,40 @@ const PropertyDetails = () => {
                   <div className="flex items-center gap-2">
                     <Maximize className="h-5 w-5 text-muted-foreground" />
                     <div>
-                      <div className="text-sm text-muted-foreground">Area</div>
+                      <div className="text-sm text-muted-foreground">Площа</div>
                       <div className="font-semibold">{property.area}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
                     <BedDouble className="h-5 w-5 text-muted-foreground" />
                     <div>
-                      <div className="text-sm text-muted-foreground">Rooms</div>
+                      <div className="text-sm text-muted-foreground">Кімнат</div>
                       <div className="font-semibold">{property.rooms}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
                     <Building2 className="h-5 w-5 text-muted-foreground" />
                     <div>
-                      <div className="text-sm text-muted-foreground">Floor</div>
+                      <div className="text-sm text-muted-foreground">Поверх</div>
                       <div className="font-semibold">{property.floor}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
                     <Calendar className="h-5 w-5 text-muted-foreground" />
                     <div>
-                      <div className="text-sm text-muted-foreground">Year</div>
+                      <div className="text-sm text-muted-foreground">Рік</div>
                       <div className="font-semibold">{property.year}</div>
                     </div>
                   </div>
                 </div>
                 
                 <div className="border-t border-border pt-6">
-                  <h3 className="font-semibold text-lg mb-3">Description</h3>
+                  <h3 className="font-semibold text-lg mb-3">Опис</h3>
                   <p className="text-muted-foreground leading-relaxed">{property.description}</p>
                 </div>
                 
                 <div className="border-t border-border pt-6">
-                  <h3 className="font-semibold text-lg mb-3">Key Features</h3>
+                  <h3 className="font-semibold text-lg mb-3">Основні особливості</h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {property.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center gap-2 text-sm">
@@ -160,7 +160,7 @@ const PropertyDetails = () => {
                 </div>
                 
                 <div className="border-t border-border pt-6">
-                  <h3 className="font-semibold text-lg mb-3">Location</h3>
+                  <h3 className="font-semibold text-lg mb-3">Розташування</h3>
                   <div className="aspect-video rounded-lg bg-muted flex items-center justify-center">
                     <MapPin className="h-12 w-12 text-muted-foreground" />
                   </div>
@@ -173,7 +173,7 @@ const PropertyDetails = () => {
           <div className="space-y-6">
             <Card className="sticky top-20">
               <CardHeader>
-                <CardTitle>Contact Seller</CardTitle>
+                <CardTitle>Зв'язатися з продавцем</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -184,16 +184,16 @@ const PropertyDetails = () => {
                 <div className="space-y-3">
                   <Button className="w-full" size="lg">
                     <Phone className="mr-2 h-4 w-4" />
-                    Show Phone
+                    Показати телефон
                   </Button>
                   <Button variant="outline" className="w-full" size="lg">
                     <Mail className="mr-2 h-4 w-4" />
-                    Send Message
+                    Написати повідомлення
                   </Button>
                 </div>
                 
                 <div className="text-xs text-muted-foreground pt-4 border-t border-border">
-                  By contacting the seller, you agree to our terms of service and privacy policy.
+                  Зв'язуючись з продавцем, ви погоджуєтесь з нашими умовами обслуговування та політикою конфіденційності.
                 </div>
               </CardContent>
             </Card>
@@ -202,7 +202,7 @@ const PropertyDetails = () => {
             
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Similar Properties</CardTitle>
+                <CardTitle className="text-lg">Схожі об'єкти</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {[1, 2].map((i) => (
@@ -211,8 +211,8 @@ const PropertyDetails = () => {
                       <img src={property1} alt="" className="object-cover w-full h-full" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-medium text-sm mb-1 truncate">Modern Apartment</h4>
-                      <div className="text-xs text-muted-foreground mb-2">Kyiv, Pechersk</div>
+                      <h4 className="font-medium text-sm mb-1 truncate">Сучасна квартира</h4>
+                      <div className="text-xs text-muted-foreground mb-2">Київ, Печерськ</div>
                       <div className="font-semibold text-primary">₴7,200,000</div>
                     </div>
                   </div>

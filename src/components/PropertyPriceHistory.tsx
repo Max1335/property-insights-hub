@@ -41,7 +41,7 @@ export const PropertyPriceHistory = ({ propertyId }: { propertyId: string }) => 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Price History</CardTitle>
+        <CardTitle>Історія цін</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">

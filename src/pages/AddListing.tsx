@@ -180,31 +180,31 @@ const AddListing = () => {
       <div className="container mx-auto px-4 py-8 max-w-3xl">
         <Card>
           <CardHeader>
-            <CardTitle>Add New Listing</CardTitle>
+            <CardTitle>Додати нове оголошення</CardTitle>
             <CardDescription>
-              Fill in the details below. Your listing will be reviewed before going live.
+              Заповніть деталі нижче. Ваше оголошення буде перевірено перед публікацією.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <Label htmlFor="title">Property Title *</Label>
+                <Label htmlFor="title">Назва нерухомості *</Label>
                 <Input
                   id="title"
                   value={formData.title}
                   onChange={(e) => setFormData({...formData, title: e.target.value})}
-                  placeholder="Modern 2-bedroom apartment in city center"
+                  placeholder="Сучасна 2-кімнатна квартира в центрі міста"
                 />
                 {errors.title && <p className="text-sm text-destructive mt-1">{errors.title}</p>}
               </div>
 
               <div>
-                <Label htmlFor="description">Description *</Label>
+                <Label htmlFor="description">Опис *</Label>
                 <Textarea
                   id="description"
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
-                  placeholder="Detailed description of the property..."
+                  placeholder="Детальний опис нерухомості..."
                   rows={5}
                 />
                 {errors.description && <p className="text-sm text-destructive mt-1">{errors.description}</p>}
@@ -212,35 +212,35 @@ const AddListing = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label>Property Type *</Label>
+                  <Label>Тип нерухомості *</Label>
                   <Select value={formData.property_type} onValueChange={(v) => setFormData({...formData, property_type: v})}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="apartment">Apartment</SelectItem>
-                      <SelectItem value="house">House</SelectItem>
-                      <SelectItem value="office">Office</SelectItem>
-                      <SelectItem value="commercial">Commercial</SelectItem>
+                      <SelectItem value="apartment">Квартира</SelectItem>
+                      <SelectItem value="house">Будинок</SelectItem>
+                      <SelectItem value="office">Офіс</SelectItem>
+                      <SelectItem value="commercial">Комерційна</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div>
-                  <Label>Transaction Type *</Label>
+                  <Label>Тип угоди *</Label>
                   <Select value={formData.transaction_type} onValueChange={(v) => setFormData({...formData, transaction_type: v})}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="sale">For Sale</SelectItem>
-                      <SelectItem value="rent">For Rent</SelectItem>
+                      <SelectItem value="sale">Продаж</SelectItem>
+                      <SelectItem value="rent">Оренда</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div>
-                  <Label htmlFor="price">Price (UAH) *</Label>
+                  <Label htmlFor="price">Ціна (грн) *</Label>
                   <Input
                     id="price"
                     type="number"
@@ -251,7 +251,7 @@ const AddListing = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="area">Area (m²) *</Label>
+                  <Label htmlFor="area">Площа (м²) *</Label>
                   <Input
                     id="area"
                     type="number"
@@ -262,7 +262,7 @@ const AddListing = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="rooms">Rooms</Label>
+                  <Label htmlFor="rooms">Кімнат</Label>
                   <Input
                     id="rooms"
                     type="number"
@@ -272,7 +272,7 @@ const AddListing = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="floor">Floor</Label>
+                  <Label htmlFor="floor">Поверх</Label>
                   <Input
                     id="floor"
                     type="number"
@@ -282,7 +282,7 @@ const AddListing = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="total_floors">Total Floors</Label>
+                  <Label htmlFor="total_floors">Поверховість</Label>
                   <Input
                     id="total_floors"
                     type="number"
@@ -292,7 +292,7 @@ const AddListing = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="building_year">Building Year</Label>
+                  <Label htmlFor="building_year">Рік будівництва</Label>
                   <Input
                     id="building_year"
                     type="number"
@@ -302,22 +302,22 @@ const AddListing = () => {
                 </div>
 
                 <div>
-                  <Label>Condition</Label>
+                  <Label>Стан</Label>
                   <Select value={formData.condition} onValueChange={(v) => setFormData({...formData, condition: v})}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="new">New</SelectItem>
-                      <SelectItem value="renovated">Renovated</SelectItem>
-                      <SelectItem value="good">Good</SelectItem>
-                      <SelectItem value="needs_repair">Needs Repair</SelectItem>
+                      <SelectItem value="new">Новий</SelectItem>
+                      <SelectItem value="renovated">Після ремонту</SelectItem>
+                      <SelectItem value="good">Добрий</SelectItem>
+                      <SelectItem value="needs_repair">Потребує ремонту</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div>
-                  <Label htmlFor="city">City *</Label>
+                  <Label htmlFor="city">Місто *</Label>
                   <Input
                     id="city"
                     value={formData.city}
@@ -327,7 +327,7 @@ const AddListing = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="district">District *</Label>
+                  <Label htmlFor="district">Район *</Label>
                   <Input
                     id="district"
                     value={formData.district}
@@ -337,7 +337,7 @@ const AddListing = () => {
                 </div>
 
                 <div className="md:col-span-2">
-                  <Label htmlFor="address">Address *</Label>
+                  <Label htmlFor="address">Адреса *</Label>
                   <Input
                     id="address"
                     value={formData.address}
@@ -348,7 +348,7 @@ const AddListing = () => {
               </div>
 
               <div className="md:col-span-2">
-                <Label className="mb-3 block">Property Images (Max 10, 5MB each)</Label>
+                <Label className="mb-3 block">Фото нерухомості (Макс 10, по 5МБ кожне)</Label>
                 <div className="border-2 border-dashed rounded-lg p-6 text-center">
                   <input
                     type="file"
@@ -362,10 +362,10 @@ const AddListing = () => {
                   <label htmlFor="images" className="cursor-pointer">
                     <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
                     <p className="text-sm text-muted-foreground mb-2">
-                      {uploading ? "Uploading..." : "Click to upload or drag and drop"}
+                      {uploading ? "Завантаження..." : "Натисніть для завантаження або перетягніть файли"}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      PNG, JPG, WEBP up to 5MB
+                      PNG, JPG, WEBP до 5МБ
                     </p>
                   </label>
                 </div>
@@ -395,9 +395,10 @@ const AddListing = () => {
               </div>
 
               <div>
-                <Label className="mb-3 block">Features</Label>
+                <Label className="mb-3 block">Особливості</Label>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {features.map(feature => (
+                  {["парковка", "ліфт", "балкон", "цілодобова охорона", 
+                    "центральне опалення", "кондиціонер", "з меблями", "після ремонту"].map(feature => (
                     <div key={feature} className="flex items-center space-x-2">
                       <Checkbox
                         id={feature}
@@ -420,10 +421,10 @@ const AddListing = () => {
 
               <div className="flex gap-4">
                 <Button type="submit" disabled={loading} className="flex-1">
-                  {loading ? "Submitting..." : "Submit for Review"}
+                  {loading ? "Відправка..." : "Відправити на перевірку"}
                 </Button>
                 <Button type="button" variant="outline" onClick={() => navigate("/listings")}>
-                  Cancel
+                  Скасувати
                 </Button>
               </div>
             </form>

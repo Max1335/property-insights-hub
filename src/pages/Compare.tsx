@@ -67,15 +67,15 @@ const Compare = () => {
         <div className="container mx-auto px-4 py-8">
           <Button variant="ghost" onClick={() => navigate(-1)} className="mb-6">
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back
+            Назад
           </Button>
           <Card>
             <CardContent className="p-12 text-center">
-              <h3 className="text-xl font-semibold mb-2">No properties to compare</h3>
+              <h3 className="text-xl font-semibold mb-2">Немає об'єктів для порівняння</h3>
               <p className="text-muted-foreground mb-6">
-                Add properties to comparison from listings
+                Додайте нерухомість для порівняння з переліку оголошень
               </p>
-              <Button onClick={() => navigate('/listings')}>Browse Properties</Button>
+              <Button onClick={() => navigate('/listings')}>Переглянути оголошення</Button>
             </CardContent>
           </Card>
         </div>
@@ -88,15 +88,15 @@ const Compare = () => {
     key: keyof Property;
     format: (v: any, p?: Property) => string;
   }> = [
-    { label: "Price", key: "price", format: (v: number) => `₴${v.toLocaleString()}` },
-    { label: "Price per m²", key: "price_per_sqm", format: (v: number) => `₴${v.toLocaleString()}` },
-    { label: "Area", key: "area", format: (v: number) => `${v} m²` },
-    { label: "Rooms", key: "rooms", format: (v: number | null) => v ? v.toString() : "N/A" },
-    { label: "Floor", key: "floor", format: (v: number, p?: Property) => p ? `${v}/${p.total_floors}` : v.toString() },
-    { label: "Building Year", key: "building_year", format: (v: number | null) => v ? v.toString() : "N/A" },
-    { label: "Condition", key: "condition", format: (v: string | null) => v || "N/A" },
-    { label: "Location", key: "city", format: (v: string, p?: Property) => p ? `${v}, ${p.district}` : v },
-    { label: "Type", key: "property_type", format: (v: string) => v },
+    { label: "Ціна", key: "price", format: (v: number) => `₴${v.toLocaleString()}` },
+    { label: "Ціна за м²", key: "price_per_sqm", format: (v: number) => `₴${v.toLocaleString()}` },
+    { label: "Площа", key: "area", format: (v: number) => `${v} м²` },
+    { label: "Кімнат", key: "rooms", format: (v: number | null) => v ? v.toString() : "—" },
+    { label: "Поверх", key: "floor", format: (v: number, p?: Property) => p ? `${v}/${p.total_floors}` : v.toString() },
+    { label: "Рік будівництва", key: "building_year", format: (v: number | null) => v ? v.toString() : "—" },
+    { label: "Стан", key: "condition", format: (v: string | null) => v || "—" },
+    { label: "Розташування", key: "city", format: (v: string, p?: Property) => p ? `${v}, ${p.district}` : v },
+    { label: "Тип", key: "property_type", format: (v: string) => v },
   ];
 
   return (
@@ -106,13 +106,13 @@ const Compare = () => {
           <div>
             <Button variant="ghost" onClick={() => navigate(-1)} className="mb-2">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back
+              Назад
             </Button>
-            <h1 className="text-3xl font-display font-bold">Compare Properties</h1>
-            <p className="text-muted-foreground">{properties.length} properties selected</p>
+            <h1 className="text-3xl font-display font-bold">Порівняння нерухомості</h1>
+            <p className="text-muted-foreground">Вибрано {properties.length} оголошень</p>
           </div>
           <Button variant="outline" onClick={clearComparison}>
-            Clear All
+            Очистити все
           </Button>
         </div>
 
