@@ -1,3 +1,4 @@
+import React from "react";
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -8,11 +9,51 @@ import { Label } from "@/components/ui/label";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { TrendingUp, TrendingDown, Download, Calculator } from "lucide-react";
 
-const priceData = [
-  { month: "Jan", kyiv: 43500, kharkiv: 28000, odesa: 37000, dnipro: 25000, lviv: 34000 },
-  { month: "Feb", kyiv: 44200, kharkiv: 28200, odesa: 37800, dnipro: 25500, lviv: 34500 },
-  { month: "Mar", kyiv: 44800, kharkiv: 28400, odesa: 38200, dnipro: 25800, lviv: 35000 },
-  { month: "Apr", kyiv: 45280, kharkiv: 28650, odesa: 38920, dnipro: 26340, lviv: 35780 },
+// Price data for different time periods (price per m²)
+const priceData3Months = [
+  { month: "Oct 2024", kyiv: 44800, kharkiv: 28400, odesa: 38200, dnipro: 25800, lviv: 35000 },
+  { month: "Nov 2024", kyiv: 45100, kharkiv: 28550, odesa: 38500, dnipro: 26100, lviv: 35350 },
+  { month: "Dec 2024", kyiv: 45280, kharkiv: 28650, odesa: 38920, dnipro: 26340, lviv: 35780 },
+];
+
+const priceData6Months = [
+  { month: "Jul 2024", kyiv: 43200, kharkiv: 27800, odesa: 36800, dnipro: 24800, lviv: 33800 },
+  { month: "Aug 2024", kyiv: 43600, kharkiv: 28000, odesa: 37200, dnipro: 25200, lviv: 34200 },
+  { month: "Sep 2024", kyiv: 44100, kharkiv: 28200, odesa: 37600, dnipro: 25500, lviv: 34600 },
+  { month: "Oct 2024", kyiv: 44800, kharkiv: 28400, odesa: 38200, dnipro: 25800, lviv: 35000 },
+  { month: "Nov 2024", kyiv: 45100, kharkiv: 28550, odesa: 38500, dnipro: 26100, lviv: 35350 },
+  { month: "Dec 2024", kyiv: 45280, kharkiv: 28650, odesa: 38920, dnipro: 26340, lviv: 35780 },
+];
+
+const priceDataYear = [
+  { month: "Jan 2024", kyiv: 39500, kharkiv: 25000, odesa: 33000, dnipro: 22000, lviv: 30000 },
+  { month: "Feb 2024", kyiv: 40200, kharkiv: 25400, odesa: 33600, dnipro: 22500, lviv: 30600 },
+  { month: "Mar 2024", kyiv: 40800, kharkiv: 25800, odesa: 34200, dnipro: 23000, lviv: 31200 },
+  { month: "Apr 2024", kyiv: 41300, kharkiv: 26200, odesa: 34800, dnipro: 23500, lviv: 31800 },
+  { month: "May 2024", kyiv: 41900, kharkiv: 26600, odesa: 35400, dnipro: 24000, lviv: 32400 },
+  { month: "Jun 2024", kyiv: 42600, kharkiv: 27200, odesa: 36200, dnipro: 24400, lviv: 33000 },
+  { month: "Jul 2024", kyiv: 43200, kharkiv: 27800, odesa: 36800, dnipro: 24800, lviv: 33800 },
+  { month: "Aug 2024", kyiv: 43600, kharkiv: 28000, odesa: 37200, dnipro: 25200, lviv: 34200 },
+  { month: "Sep 2024", kyiv: 44100, kharkiv: 28200, odesa: 37600, dnipro: 25500, lviv: 34600 },
+  { month: "Oct 2024", kyiv: 44800, kharkiv: 28400, odesa: 38200, dnipro: 25800, lviv: 35000 },
+  { month: "Nov 2024", kyiv: 45100, kharkiv: 28550, odesa: 38500, dnipro: 26100, lviv: 35350 },
+  { month: "Dec 2024", kyiv: 45280, kharkiv: 28650, odesa: 38920, dnipro: 26340, lviv: 35780 },
+];
+
+const priceData2Years = [
+  { month: "Jan 2023", kyiv: 32000, kharkiv: 20000, odesa: 27000, dnipro: 18000, lviv: 24000 },
+  { month: "Mar 2023", kyiv: 33500, kharkiv: 21000, odesa: 28500, dnipro: 19000, lviv: 25500 },
+  { month: "May 2023", kyiv: 35000, kharkiv: 22000, odesa: 30000, dnipro: 20000, lviv: 27000 },
+  { month: "Jul 2023", kyiv: 36500, kharkiv: 23000, odesa: 31000, dnipro: 20800, lviv: 28000 },
+  { month: "Sep 2023", kyiv: 37800, kharkiv: 24000, odesa: 32000, dnipro: 21500, lviv: 29000 },
+  { month: "Nov 2023", kyiv: 38800, kharkiv: 24500, odesa: 32500, dnipro: 21800, lviv: 29500 },
+  { month: "Jan 2024", kyiv: 39500, kharkiv: 25000, odesa: 33000, dnipro: 22000, lviv: 30000 },
+  { month: "Mar 2024", kyiv: 40800, kharkiv: 25800, odesa: 34200, dnipro: 23000, lviv: 31200 },
+  { month: "May 2024", kyiv: 41900, kharkiv: 26600, odesa: 35400, dnipro: 24000, lviv: 32400 },
+  { month: "Jul 2024", kyiv: 43200, kharkiv: 27800, odesa: 36800, dnipro: 24800, lviv: 33800 },
+  { month: "Sep 2024", kyiv: 44100, kharkiv: 28200, odesa: 37600, dnipro: 25500, lviv: 34600 },
+  { month: "Nov 2024", kyiv: 45100, kharkiv: 28550, odesa: 38500, dnipro: 26100, lviv: 35350 },
+  { month: "Dec 2024", kyiv: 45280, kharkiv: 28650, odesa: 38920, dnipro: 26340, lviv: 35780 },
 ];
 
 const listingsData = [
@@ -33,10 +74,28 @@ const distributionData = [
 const COLORS = ["hsl(var(--chart-1))", "hsl(var(--chart-2))", "hsl(var(--chart-3))", "hsl(var(--chart-4))"];
 
 const Analytics = () => {
+  const [timeRange, setTimeRange] = React.useState("year");
+  
+  const getPriceData = () => {
+    switch (timeRange) {
+      case "3months":
+        return priceData3Months;
+      case "6months":
+        return priceData6Months;
+      case "year":
+        return priceDataYear;
+      case "2years":
+        return priceData2Years;
+      default:
+        return priceDataYear;
+    }
+  };
+  
   const handleExportData = () => {
+    const currentData = getPriceData();
     const csvContent = [
       ['Month', 'Kyiv', 'Kharkiv', 'Odesa', 'Dnipro', 'Lviv'],
-      ...priceData.map(row => [row.month, row.kyiv, row.kharkiv, row.odesa, row.dnipro, row.lviv])
+      ...currentData.map(row => [row.month, row.kyiv, row.kharkiv, row.odesa, row.dnipro, row.lviv])
     ].map(row => row.join(',')).join('\n');
     
     const blob = new Blob([csvContent], { type: 'text/csv' });
@@ -152,14 +211,15 @@ const Analytics = () => {
                 <div className="flex items-center justify-between flex-wrap gap-4">
                   <CardTitle>Price Dynamics (per m²)</CardTitle>
                   <div className="flex gap-2">
-                    <Select defaultValue="4months">
+                    <Select value={timeRange} onValueChange={setTimeRange}>
                       <SelectTrigger className="w-[140px]">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="4months">Last 4 Months</SelectItem>
+                        <SelectItem value="3months">Last 3 Months</SelectItem>
                         <SelectItem value="6months">Last 6 Months</SelectItem>
                         <SelectItem value="year">Last Year</SelectItem>
+                        <SelectItem value="2years">Last 2 Years</SelectItem>
                       </SelectContent>
                     </Select>
                     <Button variant="outline" size="sm" onClick={handleExportData}>
@@ -171,7 +231,7 @@ const Analytics = () => {
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={400}>
-                  <LineChart data={priceData}>
+                  <LineChart data={getPriceData()}>
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                     <XAxis dataKey="month" stroke="hsl(var(--muted-foreground))" />
                     <YAxis stroke="hsl(var(--muted-foreground))" />
