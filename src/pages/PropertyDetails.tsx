@@ -4,10 +4,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Maximize, BedDouble, Building2, Calendar, Phone, Mail, Heart, Share2 } from "lucide-react";
 import { useParams } from "react-router-dom";
+import { usePropertyView } from "@/hooks/usePropertyView";
+import { useFavorite } from "@/hooks/useFavorite";
 import property1 from "@/assets/property-1.jpg";
 
 const PropertyDetails = () => {
   const { id } = useParams();
+  
+  // Track property view
+  usePropertyView(id);
+  
+  // Favorite functionality
+  const { isFavorite, toggleFavorite, loading: favoriteLoading } = useFavorite(id);
   
   const property = {
     id: 1,
@@ -59,8 +67,14 @@ const PropertyDetails = () => {
                 <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
                   <Badge variant="default">New</Badge>
                   <div className="flex gap-2">
-                    <Button size="icon" variant="secondary" className="rounded-full">
-                      <Heart className="h-4 w-4" />
+                    <Button 
+                      size="icon" 
+                      variant="secondary" 
+                      className="rounded-full"
+                      onClick={toggleFavorite}
+                      disabled={favoriteLoading}
+                    >
+                      <Heart className={`h-4 w-4 ${isFavorite ? 'fill-current text-destructive' : ''}`} />
                     </Button>
                     <Button size="icon" variant="secondary" className="rounded-full">
                       <Share2 className="h-4 w-4" />
