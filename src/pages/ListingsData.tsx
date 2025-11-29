@@ -153,8 +153,7 @@ const ListingsData = () => {
         
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Filters Sidebar */}
-          <aside className={`lg:block ${showFilters ? 'block' : 'hidden'}`}>
-            <Card className="sticky top-20">
+          <aside className={`lg:block ${showFilters ? 'block' : 'hidden'}`}>Об'єкти нерухомост<Card className="sticky top-20">
               <CardContent className="p-6 space-y-6">
                 <div className="flex items-center justify-between">
                   <h2 className="font-semibold text-lg flex items-center gap-2">
