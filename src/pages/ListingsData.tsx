@@ -278,8 +278,8 @@ const ListingsData = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {properties.map((property, index) => (
-                  <Link key={property.id} to={`/property/${property.id}`}>
-                    <Card className="group overflow-hidden hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 border-border h-full">
+                  <Card key={property.id} className="group overflow-hidden hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 border-border h-full">
+                    <Link to={`/property/${property.id}`}>
                       <div className="relative aspect-[4/3] overflow-hidden">
                         <img 
                           src={images[index % images.length]} 
@@ -290,8 +290,10 @@ const ListingsData = () => {
                           {property.property_type}
                         </Badge>
                       </div>
-                      
-                      <CardContent className="p-5">
+                    </Link>
+                    
+                    <CardContent className="p-5">
+                      <Link to={`/property/${property.id}`}>
                         <h3 className="font-semibold text-lg mb-3 group-hover:text-primary transition-colors line-clamp-1">
                           {property.title}
                         </h3>
@@ -316,30 +318,36 @@ const ListingsData = () => {
                             <span>Floor {property.floor}/{property.total_floors}</span>
                           </div>
                         </div>
-                        
-                        <div className="flex items-baseline justify-between pt-4 border-t border-border">
-                          <div>
-                            <div className="text-2xl font-bold text-foreground">
-                              ₴{property.price.toLocaleString()}
-                            </div>
-                            <div className="text-xs text-muted-foreground">
-                              ₴{property.price_per_sqm?.toLocaleString()}/m²
-                            </div>
+                      </Link>
+                      
+                      <div className="flex items-baseline justify-between pt-4 border-t border-border">
+                        <div>
+                          <div className="text-2xl font-bold text-foreground">
+                            ₴{property.price.toLocaleString()}
                           </div>
-                          <div className="flex gap-2">
-                            <Checkbox
-                              checked={isInComparison(property.id)}
-                              onCheckedChange={() => addToComparison(property.id)}
-                              onClick={(e) => e.preventDefault()}
-                            />
-                            <Button variant="ghost" size="sm" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                              Details
-                            </Button>
+                          <div className="text-xs text-muted-foreground">
+                            ₴{property.price_per_sqm?.toLocaleString()}/m²
                           </div>
                         </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
+                        <Link to={`/property/${property.id}`}>
+                          <Button variant="ghost" size="sm" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                            Details
+                          </Button>
+                        </Link>
+                      </div>
+                      
+                      <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border">
+                        <Checkbox
+                          id={`compare-${property.id}`}
+                          checked={isInComparison(property.id)}
+                          onCheckedChange={() => addToComparison(property.id)}
+                        />
+                        <Label htmlFor={`compare-${property.id}`} className="text-sm cursor-pointer">
+                          Add to compare
+                        </Label>
+                      </div>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
             )}
