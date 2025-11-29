@@ -188,7 +188,9 @@ const ListingsData = () => {
                       value={priceRange}
                       onValueChange={setPriceRange}
                       max={20000000}
+                      min={0}
                       step={100000}
+                      minStepsBetweenThumbs={1}
                       className="mb-2"
                     />
                     <div className="flex justify-between text-sm text-muted-foreground">
