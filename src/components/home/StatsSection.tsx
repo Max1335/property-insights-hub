@@ -3,7 +3,7 @@ import { TrendingUp, TrendingDown, Building2, DollarSign } from "lucide-react";
 
 const statsData = [
   {
-    city: "Kyiv",
+    city: "Київ",
     avgPrice: "₴45,280",
     pricePerSqm: true,
     change: "+3.2%",
@@ -11,7 +11,7 @@ const statsData = [
     listings: "2,847",
   },
   {
-    city: "Kharkiv",
+    city: "Харків",
     avgPrice: "₴28,650",
     pricePerSqm: true,
     change: "+1.8%",
@@ -19,7 +19,7 @@ const statsData = [
     listings: "1,523",
   },
   {
-    city: "Odesa",
+    city: "Одеса",
     avgPrice: "₴38,920",
     pricePerSqm: true,
     change: "-0.5%",
@@ -27,7 +27,7 @@ const statsData = [
     listings: "1,892",
   },
   {
-    city: "Dnipro",
+    city: "Дніпро",
     avgPrice: "₴26,340",
     pricePerSqm: true,
     change: "+2.1%",
@@ -35,7 +35,7 @@ const statsData = [
     listings: "1,234",
   },
   {
-    city: "Lviv",
+    city: "Львів",
     avgPrice: "₴35,780",
     pricePerSqm: true,
     change: "+1.5%",
@@ -49,10 +49,10 @@ const StatsSection = () => {
     <section className="container mx-auto px-4 py-16">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-          Market Overview
+          Огляд ринку
         </h2>
         <p className="text-lg text-muted-foreground">
-          Real-time statistics from major Ukrainian cities
+          Статистика в реальному часі з великих міст України
         </p>
       </div>
       
@@ -73,7 +73,7 @@ const StatsSection = () => {
                 <div className="text-2xl font-bold text-foreground">
                   {stat.avgPrice}
                 </div>
-                <div className="text-xs text-muted-foreground">per m²</div>
+                <div className="text-xs text-muted-foreground">за м²</div>
               </div>
               
               <div className="flex items-center justify-between">
@@ -89,11 +89,11 @@ const StatsSection = () => {
                     {stat.change}
                   </span>
                 </div>
-                <div className="text-xs text-muted-foreground">this month</div>
+                <div className="text-xs text-muted-foreground">цього місяця</div>
               </div>
               
               <div className="pt-3 border-t border-border">
-                <div className="text-sm text-muted-foreground">Active listings</div>
+                <div className="text-sm text-muted-foreground">Активних оголошень</div>
                 <div className="text-lg font-semibold text-foreground">{stat.listings}</div>
               </div>
             </CardContent>

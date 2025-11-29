@@ -12,20 +12,20 @@ const About = () => {
       <div className="container mx-auto px-4 py-8">
         <section className="max-w-4xl mx-auto mb-16">
           <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 text-center">
-            About RealEstate Analytics
+            Про Аналітику Нерухомості
           </h1>
           <p className="text-xl text-muted-foreground text-center mb-12">
-            Your trusted partner for data-driven real estate decisions in Ukraine
+            Ваш надійний партнер для прийняття рішень щодо нерухомості на основі даних в Україні
           </p>
           
           <div className="prose prose-lg max-w-none">
             <Card className="mb-8">
               <CardContent className="p-8">
-                <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
+                <h2 className="text-2xl font-bold mb-4">Наша місія</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  RealEstate Analytics was created to help Ukrainians make informed decisions in the property market. 
-                  We believe that access to comprehensive market data and analytics should be available to everyone - 
-                  from first-time buyers to seasoned real estate professionals.
+                  Аналітика Нерухомості створена для того, щоб допомогти українцям приймати обґрунтовані рішення на ринку нерухомості. 
+                  Ми віримо, що доступ до комплексних даних ринку та аналітики має бути доступний кожному - 
+                  від тих, хто купує нерухомість вперше, до досвідчених професіоналів у сфері нерухомості.
                 </p>
               </CardContent>
             </Card>
@@ -33,7 +33,7 @@ const About = () => {
         </section>
         
         <section className="mb-16">
-          <h2 className="text-3xl font-display font-bold text-center mb-12">What We Offer</h2>
+          <h2 className="text-3xl font-display font-bold text-center mb-12">Що ми пропонуємо</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="text-center">
@@ -41,9 +41,9 @@ const About = () => {
                 <div className="rounded-lg bg-primary/10 w-16 h-16 flex items-center justify-center mx-auto mb-4">
                   <Database className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="font-semibold text-lg mb-2">Comprehensive Database</h3>
+                <h3 className="font-semibold text-lg mb-2">Комплексна база даних</h3>
                 <p className="text-sm text-muted-foreground">
-                  Thousands of verified listings across 5 major Ukrainian cities
+                  Тисячі перевірених оголошень у 5 великих містах України
                 </p>
               </CardContent>
             </Card>
@@ -53,9 +53,9 @@ const About = () => {
                 <div className="rounded-lg bg-primary/10 w-16 h-16 flex items-center justify-center mx-auto mb-4">
                   <TrendingUp className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="font-semibold text-lg mb-2">Market Analytics</h3>
+                <h3 className="font-semibold text-lg mb-2">Ринкова аналітика</h3>
                 <p className="text-sm text-muted-foreground">
-                  Real-time price trends and market dynamics visualization
+                  Цінові тренди в реальному часі та візуалізація динаміки ринку
                 </p>
               </CardContent>
             </Card>
@@ -65,9 +65,9 @@ const About = () => {
                 <div className="rounded-lg bg-primary/10 w-16 h-16 flex items-center justify-center mx-auto mb-4">
                   <Shield className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="font-semibold text-lg mb-2">Verified Information</h3>
+                <h3 className="font-semibold text-lg mb-2">Перевірена інформація</h3>
                 <p className="text-sm text-muted-foreground">
-                  All listings are moderated for accuracy and quality
+                  Всі оголошення проходять модерацію для забезпечення точності та якості
                 </p>
               </CardContent>
             </Card>
@@ -77,9 +77,9 @@ const About = () => {
                 <div className="rounded-lg bg-primary/10 w-16 h-16 flex items-center justify-center mx-auto mb-4">
                   <Target className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="font-semibold text-lg mb-2">Smart Tools</h3>
+                <h3 className="font-semibold text-lg mb-2">Розумні інструменти</h3>
                 <p className="text-sm text-muted-foreground">
-                  Advanced search filters and mortgage calculators
+                  Розширені фільтри пошуку та іпотечні калькулятори
                 </p>
               </CardContent>
             </Card>
@@ -89,21 +89,21 @@ const About = () => {
         <section className="mb-16">
           <Card>
             <CardContent className="p-8">
-              <h2 className="text-2xl font-bold mb-4">Our Data Sources</h2>
+              <h2 className="text-2xl font-bold mb-4">Наші джерела даних</h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  We aggregate data from multiple reliable sources to provide you with the most comprehensive 
-                  view of the Ukrainian real estate market:
+                  Ми агрегуємо дані з кількох надійних джерел, щоб надати вам найповніший 
+                  огляд українського ринку нерухомості:
                 </p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
-                  <li>Direct partnerships with leading real estate agencies</li>
-                  <li>Verified listings from property owners</li>
-                  <li>Public real estate statistics and market reports</li>
-                  <li>Continuously updated pricing data across all major cities</li>
+                  <li>Прямі партнерства з провідними агентствами нерухомості</li>
+                  <li>Перевірені оголошення від власників</li>
+                  <li>Публічна статистика нерухомості та ринкові звіти</li>
+                  <li>Постійно оновлювані дані про ціни в усіх великих містах</li>
                 </ul>
                 <p className="pt-4">
-                  Our analytical team processes this information to provide accurate trends, forecasts, 
-                  and insights that help you make better decisions.
+                  Наша аналітична команда обробляє цю інформацію, щоб надати точні тренди, прогнози 
+                  та інсайти, які допомагають вам приймати кращі рішення.
                 </p>
               </div>
             </CardContent>
@@ -115,17 +115,17 @@ const About = () => {
             <CardContent className="p-8">
               <div className="text-center mb-6">
                 <Mail className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h2 className="text-2xl font-bold mb-2">Get in Touch</h2>
+                <h2 className="text-2xl font-bold mb-2">Зв'яжіться з нами</h2>
                 <p className="text-muted-foreground">
-                  Interested in partnership or have questions? Contact us
+                  Зацікавлені у партнерстві або маєте питання? Напишіть нам
                 </p>
               </div>
               
               <form className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="name">Name</Label>
-                    <Input id="name" placeholder="Your name" className="mt-2" />
+                    <Label htmlFor="name">Ім'я</Label>
+                    <Input id="name" placeholder="Ваше ім'я" className="mt-2" />
                   </div>
                   <div>
                     <Label htmlFor="email">Email</Label>
@@ -134,22 +134,22 @@ const About = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="subject">Subject</Label>
-                  <Input id="subject" placeholder="How can we help?" className="mt-2" />
+                  <Label htmlFor="subject">Тема</Label>
+                  <Input id="subject" placeholder="Як ми можемо допомогти?" className="mt-2" />
                 </div>
                 
                 <div>
-                  <Label htmlFor="message">Message</Label>
+                  <Label htmlFor="message">Повідомлення</Label>
                   <Textarea 
                     id="message" 
-                    placeholder="Tell us more about your inquiry..." 
+                    placeholder="Розкажіть нам більше про ваш запит..." 
                     rows={5}
                     className="mt-2"
                   />
                 </div>
                 
                 <Button type="submit" className="w-full" size="lg">
-                  Send Message
+                  Надіслати повідомлення
                 </Button>
               </form>
             </CardContent>

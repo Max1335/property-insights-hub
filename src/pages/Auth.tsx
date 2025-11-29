@@ -11,8 +11,8 @@ import { Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 
-const emailSchema = z.string().email("Please enter a valid email address");
-const passwordSchema = z.string().min(6, "Password must be at least 6 characters");
+const emailSchema = z.string().email("Будь ласка, введіть дійсну адресу електронної пошти");
+const passwordSchema = z.string().min(6, "Пароль має містити принаймні 6 символів");
 
 const Auth = () => {
   const { signIn, signUp, user } = useAuth();
@@ -27,7 +27,6 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Redirect if already logged in
   useEffect(() => {
     if (user) {
       navigate("/");
@@ -61,7 +60,7 @@ const Auth = () => {
     const newErrors: Record<string, string> = {};
     
     if (!signUpFullName.trim()) {
-      newErrors.signUpFullName = "Full name is required";
+      newErrors.signUpFullName = "Повне ім'я обов'язкове";
     }
     
     try {
@@ -108,20 +107,20 @@ const Auth = () => {
         <Link to="/" className="flex items-center justify-center gap-2 mb-8">
           <Building2 className="h-8 w-8 text-primary" />
           <span className="text-2xl font-display font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            RealEstate Analytics
+            Аналітика Нерухомості
           </span>
         </Link>
         
         <Card>
           <CardHeader>
-            <CardTitle>Welcome</CardTitle>
-            <CardDescription>Sign in to your account or create a new one</CardDescription>
+            <CardTitle>Вітаємо</CardTitle>
+            <CardDescription>Увійдіть у свій акаунт або створіть новий</CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="signin" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="signin">Sign In</TabsTrigger>
-                <TabsTrigger value="signup">Sign Up</TabsTrigger>
+                <TabsTrigger value="signin">Вхід</TabsTrigger>
+                <TabsTrigger value="signup">Реєстрація</TabsTrigger>
               </TabsList>
               
               <TabsContent value="signin">
@@ -142,7 +141,7 @@ const Auth = () => {
                   </div>
                   
                   <div>
-                    <Label htmlFor="signin-password">Password</Label>
+                    <Label htmlFor="signin-password">Пароль</Label>
                     <Input
                       id="signin-password"
                       type="password"
@@ -157,7 +156,7 @@ const Auth = () => {
                   </div>
                   
                   <Button type="submit" className="w-full" size="lg" disabled={loading}>
-                    {loading ? "Signing in..." : "Sign In"}
+                    {loading ? "Вхід..." : "Увійти"}
                   </Button>
                 </form>
               </TabsContent>
@@ -165,11 +164,11 @@ const Auth = () => {
               <TabsContent value="signup">
                 <form onSubmit={handleSignUp} className="space-y-4">
                   <div>
-                    <Label htmlFor="signup-name">Full Name</Label>
+                    <Label htmlFor="signup-name">Повне ім'я</Label>
                     <Input
                       id="signup-name"
                       type="text"
-                      placeholder="John Doe"
+                      placeholder="Ім'я Прізвище"
                       value={signUpFullName}
                       onChange={(e) => setSignUpFullName(e.target.value)}
                       className="mt-2"
@@ -195,7 +194,7 @@ const Auth = () => {
                   </div>
                   
                   <div>
-                    <Label htmlFor="signup-password">Password</Label>
+                    <Label htmlFor="signup-password">Пароль</Label>
                     <Input
                       id="signup-password"
                       type="password"
@@ -210,20 +209,20 @@ const Auth = () => {
                   </div>
                   
                   <div>
-                    <Label htmlFor="signup-role">I am a...</Label>
+                    <Label htmlFor="signup-role">Я...</Label>
                     <Select value={signUpRole} onValueChange={setSignUpRole}>
                       <SelectTrigger className="mt-2">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="user">Buyer / Tenant</SelectItem>
-                        <SelectItem value="realtor">Realtor / Agent</SelectItem>
+                        <SelectItem value="user">Покупець / Орендар</SelectItem>
+                        <SelectItem value="realtor">Рієлтор / Агент</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   
                   <Button type="submit" className="w-full" size="lg" disabled={loading}>
-                    {loading ? "Creating account..." : "Create Account"}
+                    {loading ? "Створення акаунту..." : "Створити акаунт"}
                   </Button>
                 </form>
               </TabsContent>
@@ -232,7 +231,7 @@ const Auth = () => {
         </Card>
         
         <p className="text-center text-sm text-muted-foreground mt-4">
-          By continuing, you agree to our Terms of Service and Privacy Policy
+          Продовжуючи, ви погоджуєтесь з нашими Умовами використання та Політикою конфіденційності
         </p>
       </div>
     </div>

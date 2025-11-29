@@ -224,55 +224,55 @@ const Analytics = () => {
     <Layout>
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">Market Analytics</h1>
-          <p className="text-muted-foreground">Comprehensive insights into Ukrainian real estate markets</p>
+          <h1 className="text-3xl font-display font-bold mb-2">Аналітика ринку нерухомості</h1>
+          <p className="text-muted-foreground">Комплексні інсайти щодо українського ринку нерухомості</p>
         </div>
         
         <Tabs defaultValue="overview" className="space-y-6">
           <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 h-auto">
-            <TabsTrigger value="overview">Market Overview</TabsTrigger>
-            <TabsTrigger value="trends">Price Trends</TabsTrigger>
-            <TabsTrigger value="distribution">Distribution</TabsTrigger>
-            <TabsTrigger value="calculator">Calculator</TabsTrigger>
+            <TabsTrigger value="overview">Огляд ринку</TabsTrigger>
+            <TabsTrigger value="trends">Цінові тренди</TabsTrigger>
+            <TabsTrigger value="distribution">Розподіл</TabsTrigger>
+            <TabsTrigger value="calculator">Калькулятор</TabsTrigger>
           </TabsList>
           
           <TabsContent value="overview" className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium">Total Active Listings</CardTitle>
+                  <CardTitle className="text-sm font-medium">Всього активних оголошень</CardTitle>
                   <TrendingUp className="h-4 w-4 text-success" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">9,174</div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    <span className="text-success">+12.3%</span> from last month
+                    <span className="text-success">+12.3%</span> від минулого місяця
                   </p>
                 </CardContent>
               </Card>
               
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium">Avg Price per m²</CardTitle>
+                  <CardTitle className="text-sm font-medium">Середня ціна за м²</CardTitle>
                   <TrendingUp className="h-4 w-4 text-success" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">₴34,795</div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    <span className="text-success">+2.1%</span> across all cities
+                    <span className="text-success">+2.1%</span> в усіх містах
                   </p>
                 </CardContent>
               </Card>
               
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
-                  <CardTitle className="text-sm font-medium">New This Month</CardTitle>
+                  <CardTitle className="text-sm font-medium">Нових цього місяця</CardTitle>
                   <TrendingUp className="h-4 w-4 text-success" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">1,247</div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    <span className="text-success">+8.7%</span> growth rate
+                    <span className="text-success">+8.7%</span> темп зростання
                   </p>
                 </CardContent>
               </Card>
@@ -281,16 +281,16 @@ const Analytics = () => {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle>Listings by City & Type</CardTitle>
+                  <CardTitle>Оголошення за містом та типом</CardTitle>
                   <Select defaultValue="all">
                     <SelectTrigger className="w-[180px]">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All Types</SelectItem>
-                      <SelectItem value="apartments">Apartments</SelectItem>
-                      <SelectItem value="houses">Houses</SelectItem>
-                      <SelectItem value="commercial">Commercial</SelectItem>
+                      <SelectItem value="all">Всі типи</SelectItem>
+                      <SelectItem value="apartments">Квартири</SelectItem>
+                      <SelectItem value="houses">Будинки</SelectItem>
+                      <SelectItem value="commercial">Комерційна</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -309,9 +309,9 @@ const Analytics = () => {
                       }}
                     />
                     <Legend />
-                    <Bar dataKey="apartments" fill="hsl(var(--chart-1))" name="Apartments" />
-                    <Bar dataKey="houses" fill="hsl(var(--chart-2))" name="Houses" />
-                    <Bar dataKey="commercial" fill="hsl(var(--chart-3))" name="Commercial" />
+                    <Bar dataKey="apartments" fill="hsl(var(--chart-1))" name="Квартири" />
+                    <Bar dataKey="houses" fill="hsl(var(--chart-2))" name="Будинки" />
+                    <Bar dataKey="commercial" fill="hsl(var(--chart-3))" name="Комерційна" />
                   </BarChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -322,22 +322,22 @@ const Analytics = () => {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between flex-wrap gap-4">
-                  <CardTitle>Price Dynamics (per m²)</CardTitle>
+                  <CardTitle>Динаміка цін (за м²)</CardTitle>
                   <div className="flex gap-2">
                     <Select value={timeRange} onValueChange={setTimeRange}>
                       <SelectTrigger className="w-[140px]">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="3months">Last 3 Months</SelectItem>
-                        <SelectItem value="6months">Last 6 Months</SelectItem>
-                        <SelectItem value="year">Last Year</SelectItem>
-                        <SelectItem value="2years">Last 2 Years</SelectItem>
+                        <SelectItem value="3months">Останні 3 місяці</SelectItem>
+                        <SelectItem value="6months">Останні 6 місяців</SelectItem>
+                        <SelectItem value="year">Останній рік</SelectItem>
+                        <SelectItem value="2years">Останні 2 роки</SelectItem>
                       </SelectContent>
                     </Select>
                     <Button variant="outline" size="sm" onClick={handleExportData}>
                       <Download className="h-4 w-4 mr-2" />
-                      Export PDF
+                      Експорт PDF
                     </Button>
                   </div>
                 </div>
@@ -357,11 +357,11 @@ const Analytics = () => {
                       }}
                     />
                     <Legend />
-                      <Line type="monotone" dataKey="kyiv" stroke="hsl(var(--chart-1))" strokeWidth={2} name="Kyiv" />
-                      <Line type="monotone" dataKey="kharkiv" stroke="hsl(var(--chart-2))" strokeWidth={2} name="Kharkiv" />
-                      <Line type="monotone" dataKey="odesa" stroke="hsl(var(--chart-3))" strokeWidth={2} name="Odesa" />
-                      <Line type="monotone" dataKey="dnipro" stroke="hsl(var(--chart-4))" strokeWidth={2} name="Dnipro" />
-                      <Line type="monotone" dataKey="lviv" stroke="hsl(var(--chart-5))" strokeWidth={2} name="Lviv" />
+                      <Line type="monotone" dataKey="kyiv" stroke="hsl(var(--chart-1))" strokeWidth={2} name="Київ" />
+                      <Line type="monotone" dataKey="kharkiv" stroke="hsl(var(--chart-2))" strokeWidth={2} name="Харків" />
+                      <Line type="monotone" dataKey="odesa" stroke="hsl(var(--chart-3))" strokeWidth={2} name="Одеса" />
+                      <Line type="monotone" dataKey="dnipro" stroke="hsl(var(--chart-4))" strokeWidth={2} name="Дніпро" />
+                      <Line type="monotone" dataKey="lviv" stroke="hsl(var(--chart-5))" strokeWidth={2} name="Львів" />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
@@ -373,17 +373,17 @@ const Analytics = () => {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between flex-wrap gap-4">
-                  <CardTitle>Price Distribution</CardTitle>
+                  <CardTitle>Розподіл цін</CardTitle>
                   <Select defaultValue="kyiv">
                     <SelectTrigger className="w-[140px]">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="kyiv">Kyiv</SelectItem>
-                      <SelectItem value="kharkiv">Kharkiv</SelectItem>
-                      <SelectItem value="odesa">Odesa</SelectItem>
-                      <SelectItem value="dnipro">Dnipro</SelectItem>
-                      <SelectItem value="lviv">Lviv</SelectItem>
+                      <SelectItem value="kyiv">Київ</SelectItem>
+                      <SelectItem value="kharkiv">Харків</SelectItem>
+                      <SelectItem value="odesa">Одеса</SelectItem>
+                      <SelectItem value="dnipro">Дніпро</SelectItem>
+                      <SelectItem value="lviv">Львів</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -417,48 +417,48 @@ const Analytics = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Calculator className="h-5 w-5" />
-                  Mortgage Calculator
+                  Іпотечний калькулятор
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <div>
-                      <Label htmlFor="price">Property Price (UAH)</Label>
+                      <Label htmlFor="price">Ціна нерухомості (грн)</Label>
                       <Input id="price" type="number" placeholder="5000000" className="mt-2" />
                     </div>
                     <div>
-                      <Label htmlFor="downpayment">Down Payment (UAH)</Label>
+                      <Label htmlFor="downpayment">Перший внесок (грн)</Label>
                       <Input id="downpayment" type="number" placeholder="1000000" className="mt-2" />
                     </div>
                     <div>
-                      <Label htmlFor="rate">Interest Rate (%)</Label>
+                      <Label htmlFor="rate">Процентна ставка (%)</Label>
                       <Input id="rate" type="number" placeholder="12" step="0.1" className="mt-2" />
                     </div>
                     <div>
-                      <Label htmlFor="term">Loan Term (years)</Label>
+                      <Label htmlFor="term">Термін кредиту (роки)</Label>
                       <Input id="term" type="number" placeholder="20" className="mt-2" />
                     </div>
-                    <Button className="w-full" size="lg">Calculate</Button>
+                    <Button className="w-full" size="lg">Розрахувати</Button>
                   </div>
                   
                   <div className="bg-muted/30 rounded-lg p-6 space-y-4">
-                    <h3 className="font-semibold text-lg mb-4">Results</h3>
+                    <h3 className="font-semibold text-lg mb-4">Результати</h3>
                     <div className="space-y-3">
                       <div className="flex justify-between items-center pb-3 border-b border-border">
-                        <span className="text-muted-foreground">Monthly Payment</span>
+                        <span className="text-muted-foreground">Щомісячний платіж</span>
                         <span className="text-2xl font-bold text-primary">₴44,100</span>
                       </div>
                       <div className="flex justify-between items-center pb-3 border-b border-border">
-                        <span className="text-muted-foreground">Total Amount</span>
+                        <span className="text-muted-foreground">Загальна сума</span>
                         <span className="font-semibold">₴10,584,000</span>
                       </div>
                       <div className="flex justify-between items-center pb-3 border-b border-border">
-                        <span className="text-muted-foreground">Total Interest</span>
+                        <span className="text-muted-foreground">Загальні відсотки</span>
                         <span className="font-semibold">₴6,584,000</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-muted-foreground">Loan Amount</span>
+                        <span className="text-muted-foreground">Сума кредиту</span>
                         <span className="font-semibold">₴4,000,000</span>
                       </div>
                     </div>

@@ -4,39 +4,39 @@ import { BarChart3, Search, Shield, TrendingUp, Users, Zap } from "lucide-react"
 const benefits = [
   {
     icon: BarChart3,
-    title: "Data-Driven Decisions",
-    description: "Make informed choices with comprehensive market analytics and trends",
-    audience: "For Buyers & Tenants",
+    title: "Рішення на основі даних",
+    description: "Приймайте обґрунтовані рішення з комплексною аналітикою та трендами ринку",
+    audience: "Для покупців та орендарів",
   },
   {
     icon: Search,
-    title: "Advanced Search",
-    description: "Find exactly what you need with powerful filtering and comparison tools",
-    audience: "For Buyers & Tenants",
+    title: "Розширений пошук",
+    description: "Знайдіть саме те, що вам потрібно, за допомогою потужних інструментів фільтрації та порівняння",
+    audience: "Для покупців та орендарів",
   },
   {
     icon: TrendingUp,
-    title: "Market Insights",
-    description: "Access real-time statistics and price dynamics across all major cities",
-    audience: "For Everyone",
+    title: "Ринкові інсайти",
+    description: "Доступ до статистики в реальному часі та динаміки цін у всіх великих містах",
+    audience: "Для всіх",
   },
   {
     icon: Users,
-    title: "Professional Tools",
-    description: "Manage multiple listings and track performance with dedicated realtor dashboard",
-    audience: "For Realtors",
+    title: "Професійні інструменти",
+    description: "Керуйте кількома оголошеннями та відстежуйте ефективність за допомогою спеціальної панелі рієлтора",
+    audience: "Для рієлторів",
   },
   {
     icon: Shield,
-    title: "Verified Listings",
-    description: "All properties are moderated to ensure quality and accuracy",
-    audience: "For Everyone",
+    title: "Перевірені оголошення",
+    description: "Всі об'єкти модеруються для забезпечення якості та точності",
+    audience: "Для всіх",
   },
   {
     icon: Zap,
-    title: "Instant Notifications",
-    description: "Get alerted about new properties and price changes matching your criteria",
-    audience: "For Buyers & Tenants",
+    title: "Миттєві сповіщення",
+    description: "Отримуйте сповіщення про нові об'єкти та зміни цін, які відповідають вашим критеріям",
+    audience: "Для покупців та орендарів",
   },
 ];
 
@@ -45,10 +45,10 @@ const BenefitsSection = () => {
     <section className="container mx-auto px-4 py-16">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-          Why Choose RealEstate Analytics
+          Чому обирають Аналітику Нерухомості
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          A comprehensive platform designed for buyers, tenants, and real estate professionals
+          Комплексна платформа, розроблена для покупців, орендарів та професіоналів нерухомості
         </p>
       </div>
       
