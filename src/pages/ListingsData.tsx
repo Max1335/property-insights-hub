@@ -8,9 +8,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { MapPin, Maximize, BedDouble, Filter, SlidersHorizontal } from "lucide-react";
+import { MapPin, Maximize, BedDouble, Filter, SlidersHorizontal, GitCompare } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useComparison } from "@/contexts/ComparisonContext";
 import property1 from "@/assets/property-1.jpg";
 import property2 from "@/assets/property-2.jpg";
 import property3 from "@/assets/property-3.jpg";
@@ -33,6 +34,7 @@ interface Property {
 const images = [property1, property2, property3];
 
 const ListingsData = () => {
+  const { comparisonIds, addToComparison, isInComparison } = useComparison();
   const [showFilters, setShowFilters] = useState(false);
   const [priceRange, setPriceRange] = useState([0, 20000000]);
   const [properties, setProperties] = useState<Property[]>([]);
@@ -40,10 +42,13 @@ const ListingsData = () => {
   const [selectedCity, setSelectedCity] = useState("all");
   const [selectedType, setSelectedType] = useState("all");
   const [sortBy, setSortBy] = useState("date");
+  const [selectedRooms, setSelectedRooms] = useState("all");
+  const [selectedCondition, setSelectedCondition] = useState("all");
+  const [minYear, setMinYear] = useState("");
 
   useEffect(() => {
     fetchProperties();
-  }, [selectedCity, selectedType, sortBy]);
+  }, [selectedCity, selectedType, sortBy, selectedRooms, selectedCondition, minYear]);
 
   const fetchProperties = async () => {
     setLoading(true);
@@ -61,6 +66,18 @@ const ListingsData = () => {
 
     if (selectedType !== "all") {
       query = query.eq('property_type', selectedType);
+    }
+
+    if (selectedRooms !== "all") {
+      query = query.eq('rooms', parseInt(selectedRooms));
+    }
+
+    if (selectedCondition !== "all") {
+      query = query.eq('condition', selectedCondition);
+    }
+
+    if (minYear) {
+      query = query.gte('building_year', parseInt(minYear));
     }
 
     // Apply sorting
@@ -162,6 +179,48 @@ const ListingsData = () => {
                       <span>₴{priceRange[1].toLocaleString()}</span>
                     </div>
                   </div>
+
+                  <div>
+                    <Label>Rooms</Label>
+                    <Select value={selectedRooms} onValueChange={setSelectedRooms}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="All" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All</SelectItem>
+                        <SelectItem value="1">1</SelectItem>
+                        <SelectItem value="2">2</SelectItem>
+                        <SelectItem value="3">3</SelectItem>
+                        <SelectItem value="4">4+</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <Label>Condition</Label>
+                    <Select value={selectedCondition} onValueChange={setSelectedCondition}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="All" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All</SelectItem>
+                        <SelectItem value="new">New</SelectItem>
+                        <SelectItem value="renovated">Renovated</SelectItem>
+                        <SelectItem value="good">Good</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="minYear">Built After</Label>
+                    <Input
+                      id="minYear"
+                      type="number"
+                      placeholder="e.g. 2010"
+                      value={minYear}
+                      onChange={(e) => setMinYear(e.target.value)}
+                    />
+                  </div>
                   
                   <Button className="w-full" onClick={applyFilters}>Apply Filters</Button>
                 </div>
@@ -185,6 +244,14 @@ const ListingsData = () => {
                 <span className="text-sm text-muted-foreground">
                   {properties.length} properties found
                 </span>
+                {comparisonIds.length > 0 && (
+                  <Link to="/compare">
+                    <Button variant="default" size="sm">
+                      <GitCompare className="h-4 w-4 mr-2" />
+                      Compare ({comparisonIds.length})
+                    </Button>
+                  </Link>
+                )}
               </div>
               
               <Select value={sortBy} onValueChange={setSortBy}>
@@ -259,9 +326,16 @@ const ListingsData = () => {
                               ₴{property.price_per_sqm?.toLocaleString()}/m²
                             </div>
                           </div>
-                          <Button variant="ghost" size="sm" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                            Details
-                          </Button>
+                          <div className="flex gap-2">
+                            <Checkbox
+                              checked={isInComparison(property.id)}
+                              onCheckedChange={() => addToComparison(property.id)}
+                              onClick={(e) => e.preventDefault()}
+                            />
+                            <Button variant="ghost" size="sm" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                              Details
+                            </Button>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
