@@ -21,31 +21,31 @@ const PropertyDetails = () => {
   const property = {
     id: 1,
     images: [property1, property1, property1],
-    title: "Luxury Penthouse with Panoramic City View",
+    title: "Розкішний пентхаус з панорамним видом на місто",
     price: "₴8,500,000",
     pricePerSqm: "₴65,385",
-    area: "130 m²",
+    area: "130 м²",
     rooms: 3,
     floor: "15/16",
     year: 2022,
-    condition: "New Building",
-    city: "Kyiv",
-    district: "Pechersk",
-    address: "15 Druzhby Narodiv Blvd",
-    description: "Exclusive penthouse apartment with stunning panoramic views of the city. This modern property features high-end finishes, floor-to-ceiling windows, and an open-plan layout. Perfect for those seeking luxury living in the heart of Kyiv.",
+    condition: "Новобудова",
+    city: "Київ",
+    district: "Печерськ",
+    address: "Бульвар Дружби Народів, 15",
+    description: "Ексклюзивна пентхаус-квартира з приголомшливим панорамним видом на місто. Ця сучасна нерухомість має висококласне оздоблення, панорамні вікна від підлоги до стелі та відкрите планування. Ідеально підходить для тих, хто прагне розкішного життя в серці Києва.",
     features: [
-      "Parking Space",
-      "24/7 Security",
-      "Elevator",
-      "Balcony",
-      "Central Heating",
-      "Air Conditioning",
-      "Furnished",
-      "Smart Home",
+      "Паркінг",
+      "Цілодобова охорона",
+      "Ліфт",
+      "Балкон",
+      "Центральне опалення",
+      "Кондиціонер",
+      "Мебльована",
+      "Розумний дім",
     ],
     seller: {
-      name: "Premium Real Estate Agency",
-      type: "Realtor",
+      name: "Преміум Агентство Нерухомості",
+      type: "Рієлтор",
       phone: "+380 44 123 4567",
       email: "contact@premiumrealestate.ua",
     },
@@ -66,7 +66,7 @@ const PropertyDetails = () => {
                   className="object-cover w-full h-full"
                 />
                 <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                  <Badge variant="default">New</Badge>
+                  <Badge variant="default">Нове</Badge>
                   <div className="flex gap-2">
                     <Button 
                       size="icon" 
@@ -87,7 +87,7 @@ const PropertyDetails = () => {
               <div className="grid grid-cols-3 gap-4">
                 {property.images.slice(1, 4).map((img, idx) => (
                   <div key={idx} className="aspect-video rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
-                    <img src={img} alt="" className="object-cover w-full h-full" />
+                    <img src={img} alt={`Фото ${idx + 2}`} className="object-cover w-full h-full" />
                   </div>
                 ))}
               </div>
@@ -205,15 +205,18 @@ const PropertyDetails = () => {
                 <CardTitle className="text-lg">Схожі об'єкти</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {[1, 2].map((i) => (
+                {[
+                  { title: "Сучасна 3-кімнатна квартира", location: "Київ, Печерськ", price: "₴7,200,000" },
+                  { title: "Затишна квартира в центрі", location: "Київ, Шевченківський", price: "₴6,800,000" }
+                ].map((item, i) => (
                   <div key={i} className="flex gap-3 pb-4 border-b border-border last:border-0 last:pb-0">
                     <div className="w-24 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                      <img src={property1} alt="" className="object-cover w-full h-full" />
+                      <img src={property1} alt={item.title} className="object-cover w-full h-full" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-medium text-sm mb-1 truncate">Сучасна квартира</h4>
-                      <div className="text-xs text-muted-foreground mb-2">Київ, Печерськ</div>
-                      <div className="font-semibold text-primary">₴7,200,000</div>
+                      <h4 className="font-medium text-sm mb-1 truncate">{item.title}</h4>
+                      <div className="text-xs text-muted-foreground mb-2">{item.location}</div>
+                      <div className="font-semibold text-primary">{item.price}</div>
                     </div>
                   </div>
                 ))}
