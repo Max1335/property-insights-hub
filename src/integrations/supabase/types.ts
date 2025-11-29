@@ -154,6 +154,68 @@ export type Database = {
         }
         Relationships: []
       }
+      property_changes: {
+        Row: {
+          change_type: string
+          changed_at: string
+          id: string
+          new_data: Json | null
+          new_price: number | null
+          old_data: Json | null
+          old_price: number | null
+          property_id: string
+        }
+        Insert: {
+          change_type: string
+          changed_at?: string
+          id?: string
+          new_data?: Json | null
+          new_price?: number | null
+          old_data?: Json | null
+          old_price?: number | null
+          property_id: string
+        }
+        Update: {
+          change_type?: string
+          changed_at?: string
+          id?: string
+          new_data?: Json | null
+          new_price?: number | null
+          old_data?: Json | null
+          old_price?: number | null
+          property_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "property_changes_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      property_comparisons: {
+        Row: {
+          created_at: string
+          id: string
+          property_ids: string[]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          property_ids: string[]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          property_ids?: string[]
+          user_id?: string
+        }
+        Relationships: []
+      }
       property_views: {
         Row: {
           id: string

@@ -6,6 +6,7 @@ import { MapPin, Maximize, BedDouble, Building2, Calendar, Phone, Mail, Heart, S
 import { useParams } from "react-router-dom";
 import { usePropertyView } from "@/hooks/usePropertyView";
 import { useFavorite } from "@/hooks/useFavorite";
+import { PropertyPriceHistory } from "@/components/PropertyPriceHistory";
 import property1 from "@/assets/property-1.jpg";
 
 const PropertyDetails = () => {
@@ -196,6 +197,8 @@ const PropertyDetails = () => {
                 </div>
               </CardContent>
             </Card>
+            
+            <PropertyPriceHistory propertyId={id || ''} />
             
             <Card>
               <CardHeader>

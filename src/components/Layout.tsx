@@ -80,11 +80,25 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     Favorites
                   </Link>
                 </DropdownMenuItem>
-                {userRole === 'realtor' && (
+                <DropdownMenuItem asChild>
+                  <Link to="/history" className="cursor-pointer flex items-center">
+                    <Building2 className="mr-2 h-4 w-4" />
+                    View History
+                  </Link>
+                </DropdownMenuItem>
+                {(userRole === 'realtor' || userRole === 'admin') && (
                   <DropdownMenuItem asChild>
-                    <Link to="/dashboard" className="cursor-pointer flex items-center">
+                    <Link to="/add-listing" className="cursor-pointer flex items-center">
                       <Building2 className="mr-2 h-4 w-4" />
-                      My Listings
+                      Add Listing
+                    </Link>
+                  </DropdownMenuItem>
+                )}
+                {userRole === 'admin' && (
+                  <DropdownMenuItem asChild>
+                    <Link to="/admin" className="cursor-pointer flex items-center">
+                      <Building2 className="mr-2 h-4 w-4" />
+                      Admin Panel
                     </Link>
                   </DropdownMenuItem>
                 )}
