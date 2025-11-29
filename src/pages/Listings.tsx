@@ -109,8 +109,8 @@ const Listings = () => {
     <Layout>
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">Property Listings</h1>
-          <p className="text-muted-foreground">Browse all available properties across Ukrainian cities</p>
+          <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">Оголошення нерухомості</h1>
+          <p className="text-muted-foreground">Перегляньте всі доступні об'єкти в українських містах</p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -121,49 +121,49 @@ const Listings = () => {
                 <div className="flex items-center justify-between">
                   <h2 className="font-semibold text-lg flex items-center gap-2">
                     <SlidersHorizontal className="h-5 w-5" />
-                    Filters
+                    Фільтри
                   </h2>
                   <Button variant="ghost" size="sm" onClick={() => setShowFilters(false)} className="lg:hidden">
-                    Close
+                    Закрити
                   </Button>
                 </div>
                 
                 <div className="space-y-4">
                   <div>
-                    <Label className="mb-2 block">City</Label>
+                    <Label className="mb-2 block">Місто</Label>
                     <Select>
                       <SelectTrigger>
-                        <SelectValue placeholder="All cities" />
+                        <SelectValue placeholder="Всі міста" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All cities</SelectItem>
-                        <SelectItem value="kyiv">Kyiv</SelectItem>
-                        <SelectItem value="kharkiv">Kharkiv</SelectItem>
-                        <SelectItem value="odesa">Odesa</SelectItem>
-                        <SelectItem value="dnipro">Dnipro</SelectItem>
-                        <SelectItem value="lviv">Lviv</SelectItem>
+                        <SelectItem value="all">Всі міста</SelectItem>
+                        <SelectItem value="kyiv">Київ</SelectItem>
+                        <SelectItem value="kharkiv">Харків</SelectItem>
+                        <SelectItem value="odesa">Одеса</SelectItem>
+                        <SelectItem value="dnipro">Дніпро</SelectItem>
+                        <SelectItem value="lviv">Львів</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   
                   <div>
-                    <Label className="mb-2 block">Property Type</Label>
+                    <Label className="mb-2 block">Тип нерухомості</Label>
                     <Select>
                       <SelectTrigger>
-                        <SelectValue placeholder="All types" />
+                        <SelectValue placeholder="Всі типи" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All types</SelectItem>
-                        <SelectItem value="apartment">Apartment</SelectItem>
-                        <SelectItem value="house">House</SelectItem>
-                        <SelectItem value="commercial">Commercial</SelectItem>
-                        <SelectItem value="office">Office</SelectItem>
+                        <SelectItem value="all">Всі типи</SelectItem>
+                        <SelectItem value="apartment">Квартира</SelectItem>
+                        <SelectItem value="house">Будинок</SelectItem>
+                        <SelectItem value="commercial">Комерційна</SelectItem>
+                        <SelectItem value="office">Офіс</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   
                   <div>
-                    <Label className="mb-3 block">Price Range (UAH)</Label>
+                    <Label className="mb-3 block">Діапазон цін (грн)</Label>
                     <Slider
                       value={priceRange}
                       onValueChange={setPriceRange}
@@ -178,7 +178,7 @@ const Listings = () => {
                   </div>
                   
                   <div>
-                    <Label className="mb-3 block">Rooms</Label>
+                    <Label className="mb-3 block">Кімнат</Label>
                     <div className="grid grid-cols-3 gap-2">
                       {[1, 2, 3, 4, "5+"].map((num) => (
                         <Button key={num} variant="outline" size="sm" className="w-full">
@@ -189,9 +189,9 @@ const Listings = () => {
                   </div>
                   
                   <div>
-                    <Label className="mb-3 block">Condition</Label>
+                    <Label className="mb-3 block">Стан</Label>
                     <div className="space-y-2">
-                      {["New Building", "Renovated", "Good", "Needs Repair"].map((condition) => (
+                      {["Новобудова", "Після ремонту", "Добрий", "Потребує ремонту"].map((condition) => (
                         <div key={condition} className="flex items-center space-x-2">
                           <Checkbox id={condition} />
                           <label htmlFor={condition} className="text-sm cursor-pointer">
@@ -202,7 +202,7 @@ const Listings = () => {
                     </div>
                   </div>
                   
-                  <Button className="w-full">Apply Filters</Button>
+                  <Button className="w-full">Застосувати фільтри</Button>
                 </div>
               </CardContent>
             </Card>
@@ -219,10 +219,10 @@ const Listings = () => {
                   className="lg:hidden"
                 >
                   <Filter className="h-4 w-4 mr-2" />
-                  Filters
+                  Фільтри
                 </Button>
                 <span className="text-sm text-muted-foreground">
-                  {allProperties.length} properties found
+                  Знайдено {allProperties.length} оголошень
                 </span>
               </div>
               
@@ -231,10 +231,10 @@ const Listings = () => {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="date">Newest First</SelectItem>
-                  <SelectItem value="price-asc">Price: Low to High</SelectItem>
-                  <SelectItem value="price-desc">Price: High to Low</SelectItem>
-                  <SelectItem value="area">Area</SelectItem>
+                  <SelectItem value="date">Спочатку нові</SelectItem>
+                  <SelectItem value="price-asc">Ціна: від низької</SelectItem>
+                  <SelectItem value="price-desc">Ціна: від високої</SelectItem>
+                  <SelectItem value="area">Площа</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -276,10 +276,10 @@ const Listings = () => {
                           {property.rooms && (
                             <div className="flex items-center gap-1">
                               <BedDouble className="h-4 w-4" />
-                              <span>{property.rooms} rooms</span>
+                              <span>{property.rooms} кімн</span>
                             </div>
                           )}
-                          <span>Floor {property.floor}</span>
+                          <span>Поверх {property.floor}</span>
                         </div>
                       </div>
                       
@@ -293,7 +293,7 @@ const Listings = () => {
                           </div>
                         </div>
                         <Button variant="ghost" size="sm" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                          Details
+                          Детальніше
                         </Button>
                       </div>
                     </CardContent>

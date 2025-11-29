@@ -106,9 +106,9 @@ const Favorites = () => {
     <Layout>
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">My Favorites</h1>
+          <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">Обране</h1>
           <p className="text-muted-foreground">
-            {favorites.length} {favorites.length === 1 ? 'property' : 'properties'} saved
+            Збережено {favorites.length} {favorites.length === 1 ? 'оголошення' : 'оголошень'}
           </p>
         </div>
 
@@ -116,12 +116,12 @@ const Favorites = () => {
           <Card>
             <CardContent className="p-12 text-center">
               <Heart className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">No favorites yet</h3>
+              <h3 className="text-xl font-semibold mb-2">Поки що немає обраного</h3>
               <p className="text-muted-foreground mb-6">
-                Start adding properties to your favorites to see them here
+                Додайте нерухомість до обраного, щоб побачити її тут
               </p>
               <Link to="/listings">
-                <Button>Browse Properties</Button>
+                <Button>Переглянути оголошення</Button>
               </Link>
             </CardContent>
           </Card>
@@ -173,10 +173,10 @@ const Favorites = () => {
                           {property.rooms && (
                             <div className="flex items-center gap-1">
                               <BedDouble className="h-4 w-4" />
-                              <span>{property.rooms} rooms</span>
+                              <span>{property.rooms} кімн</span>
                             </div>
                           )}
-                          <span>Floor {property.floor}/{property.total_floors}</span>
+                          <span>Поверх {property.floor}/{property.total_floors}</span>
                         </div>
                       </div>
                       
@@ -190,7 +190,7 @@ const Favorites = () => {
                           </div>
                         </div>
                         <Button variant="ghost" size="sm" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                          View Details
+                          Детальніше
                         </Button>
                       </div>
                     </Link>

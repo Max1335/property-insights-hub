@@ -55,15 +55,15 @@ const FeaturedListings = () => {
       <div className="flex items-center justify-between mb-12">
         <div>
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-2">
-            Featured Properties
+            Рекомендовані оголошення
           </h2>
           <p className="text-lg text-muted-foreground">
-            Handpicked listings worth your attention
+            Відібрані пропозиції, що заслуговують на вашу увагу
           </p>
         </div>
         <Link to="/listings">
           <Button variant="outline" className="hidden md:flex items-center gap-2">
-            View All
+            Дивитись всі
             <ArrowRight className="h-4 w-4" />
           </Button>
         </Link>
@@ -106,7 +106,7 @@ const FeaturedListings = () => {
                     {property.rooms && (
                       <div className="flex items-center gap-1">
                         <BedDouble className="h-4 w-4" />
-                        <span>{property.rooms} rooms</span>
+                        <span>{property.rooms} кімн</span>
                       </div>
                     )}
                   </div>
@@ -122,7 +122,7 @@ const FeaturedListings = () => {
                     </div>
                   </div>
                   <Button variant="ghost" size="sm" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                    View Details
+                    Детальніше
                   </Button>
                 </div>
               </CardContent>
@@ -134,7 +134,7 @@ const FeaturedListings = () => {
       <div className="mt-8 text-center md:hidden">
         <Link to="/listings">
           <Button variant="outline" className="w-full">
-            View All Properties
+            Дивитись всі оголошення
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </Link>

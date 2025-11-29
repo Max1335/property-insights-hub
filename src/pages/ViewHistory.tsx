@@ -85,9 +85,9 @@ const ViewHistory = () => {
     <Layout>
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">View History</h1>
+          <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">Історія переглядів</h1>
           <p className="text-muted-foreground">
-            Recently viewed properties
+            Нещодавно переглянута нерухомість
           </p>
         </div>
 
@@ -95,12 +95,12 @@ const ViewHistory = () => {
           <Card>
             <CardContent className="p-12 text-center">
               <Clock className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">No viewing history</h3>
+              <h3 className="text-xl font-semibold mb-2">Історія переглядів порожня</h3>
               <p className="text-muted-foreground mb-6">
-                Start browsing properties to build your history
+                Почніть переглядати оголошення, щоб побудувати історію
               </p>
               <Link to="/listings">
-                <Button>Browse Properties</Button>
+                <Button>Переглянути оголошення</Button>
               </Link>
             </CardContent>
           </Card>
@@ -145,7 +145,7 @@ const ViewHistory = () => {
                           {property.rooms && (
                             <div className="flex items-center gap-1">
                               <BedDouble className="h-4 w-4" />
-                              <span>{property.rooms} rooms</span>
+                              <span>{property.rooms} кімн</span>
                             </div>
                           )}
                         </div>
