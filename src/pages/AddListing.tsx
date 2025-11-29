@@ -12,6 +12,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { z } from "zod";
+import { Upload, X } from "lucide-react";
 
 const listingSchema = z.object({
   title: z.string().min(10, "Title must be at least 10 characters"),
@@ -25,6 +26,8 @@ const AddListing = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+  const [uploading, setUploading] = useState(false);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -54,6 +57,57 @@ const AddListing = () => {
       navigate("/");
     }
   }, [user, userRole, navigate]);
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    if (uploadedImages.length + files.length > 10) {
+      toast.error("Maximum 10 images allowed");
+      return;
+    }
+
+    setUploading(true);
+    const newImageUrls: string[] = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error(`${file.name} is too large. Max 5MB per image`);
+        continue;
+      }
+
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${user?.id}/${Math.random().toString(36).substring(2)}.${fileExt}`;
+
+      const { data, error } = await supabase.storage
+        .from('property-images')
+        .upload(fileName, file);
+
+      if (error) {
+        toast.error(`Failed to upload ${file.name}`);
+        console.error(error);
+      } else {
+        const { data: urlData } = supabase.storage
+          .from('property-images')
+          .getPublicUrl(fileName);
+        
+        newImageUrls.push(urlData.publicUrl);
+      }
+    }
+
+    setUploadedImages([...uploadedImages, ...newImageUrls]);
+    setUploading(false);
+    
+    if (newImageUrls.length > 0) {
+      toast.success(`${newImageUrls.length} image(s) uploaded`);
+    }
+  };
+
+  const removeImage = (index: number) => {
+    setUploadedImages(uploadedImages.filter((_, i) => i !== index));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -86,6 +140,7 @@ const AddListing = () => {
         district: formData.district,
         address: formData.address,
         features: formData.features,
+        images: uploadedImages,
         seller_id: user?.id,
         status: 'pending',
       });
@@ -281,6 +336,53 @@ const AddListing = () => {
                     onChange={(e) => setFormData({...formData, address: e.target.value})}
                   />
                 </div>
+              </div>
+
+              <div className="md:col-span-2">
+                <Label className="mb-3 block">Property Images (Max 10, 5MB each)</Label>
+                <div className="border-2 border-dashed rounded-lg p-6 text-center">
+                  <input
+                    type="file"
+                    id="images"
+                    multiple
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                    disabled={uploading || uploadedImages.length >= 10}
+                  />
+                  <label htmlFor="images" className="cursor-pointer">
+                    <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+                    <p className="text-sm text-muted-foreground mb-2">
+                      {uploading ? "Uploading..." : "Click to upload or drag and drop"}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      PNG, JPG, WEBP up to 5MB
+                    </p>
+                  </label>
+                </div>
+
+                {uploadedImages.length > 0 && (
+                  <div className="grid grid-cols-3 gap-4 mt-4">
+                    {uploadedImages.map((url, index) => (
+                      <div key={index} className="relative group">
+                        <img
+                          src={url}
+                          alt={`Upload ${index + 1}`}
+                          className="w-full h-24 object-cover rounded-lg"
+                        />
+                        <Button
+                          type="button"
+                          variant="destructive"
+                          size="icon"
+                          className="absolute top-1 right-1 h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
+                          onClick={() => removeImage(index)}
+                        >
+                          <X className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div>
