@@ -24,7 +24,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <Link to="/" className="flex items-center gap-2 font-bold text-xl">
             <Building2 className="h-6 w-6 text-primary" />
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-display">
-              RealEstate Analytics
+              Аналітика Нерухомості
             </span>
           </Link>
           
@@ -35,7 +35,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 isActive("/") ? "text-primary" : "text-foreground"
               }`}
             >
-              Home
+              Головна
             </Link>
             <Link 
               to="/listings" 
@@ -43,7 +43,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 isActive("/listings") ? "text-primary" : "text-foreground"
               }`}
             >
-              Listings
+              Об'єкти
             </Link>
             <Link 
               to="/analytics" 
@@ -51,7 +51,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 isActive("/analytics") ? "text-primary" : "text-foreground"
               }`}
             >
-              Analytics
+              Аналітика
             </Link>
             <Link 
               to="/about" 
@@ -59,7 +59,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 isActive("/about") ? "text-primary" : "text-foreground"
               }`}
             >
-              About
+              Про нас
             </Link>
           </div>
           
@@ -72,25 +72,25 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>Мій акаунт</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link to="/favorites" className="cursor-pointer flex items-center">
                     <Heart className="mr-2 h-4 w-4" />
-                    Favorites
+                    Обране
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to="/history" className="cursor-pointer flex items-center">
                     <Building2 className="mr-2 h-4 w-4" />
-                    View History
+                    Історія переглядів
                   </Link>
                 </DropdownMenuItem>
                 {(userRole === 'realtor' || userRole === 'admin') && (
                   <DropdownMenuItem asChild>
                     <Link to="/add-listing" className="cursor-pointer flex items-center">
                       <Building2 className="mr-2 h-4 w-4" />
-                      Add Listing
+                      Додати оголошення
                     </Link>
                   </DropdownMenuItem>
                 )}
@@ -98,14 +98,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                   <DropdownMenuItem asChild>
                     <Link to="/admin" className="cursor-pointer flex items-center">
                       <Building2 className="mr-2 h-4 w-4" />
-                      Admin Panel
+                      Панель адміністратора
                     </Link>
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => signOut()} className="cursor-pointer text-destructive">
                   <LogOut className="mr-2 h-4 w-4" />
-                  Sign Out
+                  Вийти
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -113,7 +113,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <Link to="/auth">
               <Button variant="default" size="sm" className="hidden md:flex items-center gap-2">
                 <User className="h-4 w-4" />
-                Sign In
+                Увійти
               </Button>
             </Link>
           )}
@@ -126,7 +126,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 className="w-full flex flex-col items-center gap-1 h-auto py-2"
               >
                 <Building2 className="h-4 w-4" />
-                <span className="text-xs">Home</span>
+                <span className="text-xs">Головна</span>
               </Button>
             </Link>
             <Link to="/listings" className="flex-1">
@@ -136,7 +136,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 className="w-full flex flex-col items-center gap-1 h-auto py-2"
               >
                 <Building2 className="h-4 w-4" />
-                <span className="text-xs">Listings</span>
+                <span className="text-xs">Об'єкти</span>
               </Button>
             </Link>
             <Link to="/analytics" className="flex-1">
@@ -146,7 +146,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 className="w-full flex flex-col items-center gap-1 h-auto py-2"
               >
                 <BarChart3 className="h-4 w-4" />
-                <span className="text-xs">Analytics</span>
+                <span className="text-xs">Аналітика</span>
               </Button>
             </Link>
             <Link to="/about" className="flex-1">
@@ -156,7 +156,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 className="w-full flex flex-col items-center gap-1 h-auto py-2"
               >
                 <Info className="h-4 w-4" />
-                <span className="text-xs">About</span>
+                <span className="text-xs">Про нас</span>
               </Button>
             </Link>
           </div>
@@ -171,45 +171,45 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <Building2 className="h-5 w-5 text-primary" />
-                <span className="font-bold text-lg">RealEstate Analytics</span>
+                <span className="font-bold text-lg">Аналітика Нерухомості</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Premium real estate market analysis for Ukrainian cities.
+                Преміум аналіз ринку нерухомості для українських міст.
               </p>
             </div>
             
             <div>
-              <h3 className="font-semibold mb-3">Platform</h3>
+              <h3 className="font-semibold mb-3">Платформа</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="/listings" className="hover:text-primary transition-colors">Browse Listings</Link></li>
-                <li><Link to="/analytics" className="hover:text-primary transition-colors">Market Analytics</Link></li>
-                <li><Link to="/about" className="hover:text-primary transition-colors">About Us</Link></li>
+                <li><Link to="/listings" className="hover:text-primary transition-colors">Переглянути об'єкти</Link></li>
+                <li><Link to="/analytics" className="hover:text-primary transition-colors">Ринкова аналітика</Link></li>
+                <li><Link to="/about" className="hover:text-primary transition-colors">Про нас</Link></li>
               </ul>
             </div>
             
             <div>
-              <h3 className="font-semibold mb-3">Cities</h3>
+              <h3 className="font-semibold mb-3">Міста</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>Kyiv</li>
-                <li>Kharkiv</li>
-                <li>Odesa</li>
-                <li>Dnipro</li>
-                <li>Lviv</li>
+                <li>Київ</li>
+                <li>Харків</li>
+                <li>Одеса</li>
+                <li>Дніпро</li>
+                <li>Львів</li>
               </ul>
             </div>
             
             <div>
-              <h3 className="font-semibold mb-3">Legal</h3>
+              <h3 className="font-semibold mb-3">Юридична інформація</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-primary transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Умови використання</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Політика конфіденційності</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Контакти</a></li>
               </ul>
             </div>
           </div>
           
           <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-            © 2025 RealEstate Analytics. All rights reserved.
+            © 2025 Аналітика Нерухомості. Всі права захищено.
           </div>
         </div>
       </footer>

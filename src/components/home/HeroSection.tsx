@@ -49,10 +49,10 @@ const HeroSection = () => {
       <div className="container relative z-10 mx-auto px-4 py-24 md:py-32">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="font-display text-4xl md:text-6xl font-bold text-white mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            Find Your Perfect Property with Data-Driven Insights
+            Знайдіть ідеальну нерухомість з аналізом даних
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-10 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-150">
-            Analyze Ukrainian real estate market trends across Kyiv, Kharkiv, Odesa, Dnipro, and Lviv
+            Аналізуйте тенденції українського ринку нерухомості у Києві, Харкові, Одесі, Дніпрі та Львові
           </p>
           
           <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-elevated animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
@@ -60,32 +60,32 @@ const HeroSection = () => {
               <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-3">
                 <Select value={selectedCity} onValueChange={setSelectedCity}>
                   <SelectTrigger className="bg-background">
-                    <SelectValue placeholder="City" />
+                    <SelectValue placeholder="Місто" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Kyiv">Kyiv</SelectItem>
-                    <SelectItem value="Kharkiv">Kharkiv</SelectItem>
-                    <SelectItem value="Odesa">Odesa</SelectItem>
-                    <SelectItem value="Dnipro">Dnipro</SelectItem>
-                    <SelectItem value="Lviv">Lviv</SelectItem>
+                    <SelectItem value="Kyiv">Київ</SelectItem>
+                    <SelectItem value="Kharkiv">Харків</SelectItem>
+                    <SelectItem value="Odesa">Одеса</SelectItem>
+                    <SelectItem value="Dnipro">Дніпро</SelectItem>
+                    <SelectItem value="Lviv">Львів</SelectItem>
                   </SelectContent>
                 </Select>
                 
                 <Select value={selectedType} onValueChange={setSelectedType}>
                   <SelectTrigger className="bg-background">
-                    <SelectValue placeholder="Property Type" />
+                    <SelectValue placeholder="Тип нерухомості" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="apartment">Apartment</SelectItem>
-                    <SelectItem value="house">House</SelectItem>
-                    <SelectItem value="office">Office</SelectItem>
-                    <SelectItem value="commercial">Commercial</SelectItem>
+                    <SelectItem value="apartment">Квартира</SelectItem>
+                    <SelectItem value="house">Будинок</SelectItem>
+                    <SelectItem value="office">Офіс</SelectItem>
+                    <SelectItem value="commercial">Комерційна</SelectItem>
                   </SelectContent>
                 </Select>
                 
                 <Input 
                   type="number" 
-                  placeholder="Max Price (UAH)" 
+                  placeholder="Макс. ціна (грн)" 
                   className="bg-background"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(e.target.value)}
@@ -93,14 +93,14 @@ const HeroSection = () => {
                 
                 <Button type="submit" className="w-full" size="lg">
                   <Search className="mr-2 h-4 w-4" />
-                  Search
+                  Пошук
                 </Button>
               </div>
               
               <Input
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Or search by keywords..."
+                placeholder="Або пошук за ключовими словами..."
                 className="bg-background"
               />
             </form>
@@ -111,7 +111,7 @@ const HeroSection = () => {
                 onClick={() => navigate('/listings')}
                 className="text-sm text-primary hover:underline font-medium"
               >
-                Advanced Search →
+                Розширений пошук →
               </button>
             </div>
           </div>
