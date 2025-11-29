@@ -1,6 +1,7 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
@@ -37,50 +38,19 @@ const HeroSection = () => {
             Analyze Ukrainian real estate market trends across Kyiv, Kharkiv, Odesa, Dnipro, and Lviv
           </p>
           
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 md:p-6 shadow-elevated animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-              <Select>
-                <SelectTrigger className="bg-background">
-                  <SelectValue placeholder="City" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="kyiv">Kyiv</SelectItem>
-                  <SelectItem value="kharkiv">Kharkiv</SelectItem>
-                  <SelectItem value="odesa">Odesa</SelectItem>
-                  <SelectItem value="dnipro">Dnipro</SelectItem>
-                  <SelectItem value="lviv">Lviv</SelectItem>
-                </SelectContent>
-              </Select>
-              
-              <Select>
-                <SelectTrigger className="bg-background">
-                  <SelectValue placeholder="Property Type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="apartment">Apartment</SelectItem>
-                  <SelectItem value="house">House</SelectItem>
-                  <SelectItem value="commercial">Commercial</SelectItem>
-                  <SelectItem value="office">Office</SelectItem>
-                </SelectContent>
-              </Select>
-              
-              <Input 
-                type="text" 
-                placeholder="Max Price (UAH)" 
-                className="bg-background"
+          <div className="max-w-2xl mx-auto">
+            <form onSubmit={handleSearch} className="flex gap-2">
+              <Input
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by city, district, or property type..."
+                className="h-14 text-lg bg-background/95 backdrop-blur"
               />
-              
-              <Button className="w-full" size="lg">
-                <Search className="mr-2 h-4 w-4" />
+              <Button type="submit" size="lg" className="h-14 px-8">
+                <Search className="h-5 w-5 mr-2" />
                 Search
               </Button>
-            </div>
-            
-            <div className="mt-4 text-center">
-              <button className="text-sm text-primary hover:underline font-medium">
-                Advanced Search →
-              </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
