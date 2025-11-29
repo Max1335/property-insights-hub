@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Layout from "@/components/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -8,6 +8,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { TrendingUp, TrendingDown, Download, Calculator } from "lucide-react";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import html2canvas from "html2canvas";
 
 // Price data for different time periods (price per m²)
 const priceData3Months = [
@@ -75,6 +78,7 @@ const COLORS = ["hsl(var(--chart-1))", "hsl(var(--chart-2))", "hsl(var(--chart-3
 
 const Analytics = () => {
   const [timeRange, setTimeRange] = React.useState("year");
+  const chartRef = useRef<HTMLDivElement>(null);
   
   const getPriceData = () => {
     switch (timeRange) {
@@ -90,21 +94,130 @@ const Analytics = () => {
         return priceDataYear;
     }
   };
-  
-  const handleExportData = () => {
-    const currentData = getPriceData();
-    const csvContent = [
-      ['Month', 'Kyiv', 'Kharkiv', 'Odesa', 'Dnipro', 'Lviv'],
-      ...currentData.map(row => [row.month, row.kyiv, row.kharkiv, row.odesa, row.dnipro, row.lviv])
-    ].map(row => row.join(',')).join('\n');
+
+  const getTimeRangeLabel = () => {
+    switch (timeRange) {
+      case "3months":
+        return "Last 3 Months";
+      case "6months":
+        return "Last 6 Months";
+      case "year":
+        return "Last Year";
+      case "2years":
+        return "Last 2 Years";
+      default:
+        return "Last Year";
+    }
+  };
+
+  const calculateStatistics = () => {
+    const data = getPriceData();
     
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'price-trends.csv';
-    a.click();
-    window.URL.revokeObjectURL(url);
+    const getAverage = (city: keyof typeof data[0]) => {
+      const sum = data.reduce((acc, item) => acc + Number(item[city]), 0);
+      return Math.round(sum / data.length);
+    };
+
+    const getGrowth = (city: keyof typeof data[0]) => {
+      const first = Number(data[0][city]);
+      const last = Number(data[data.length - 1][city]);
+      return (((last - first) / first) * 100).toFixed(1);
+    };
+
+    return {
+      kyiv: { avg: getAverage("kyiv"), growth: getGrowth("kyiv") },
+      kharkiv: { avg: getAverage("kharkiv"), growth: getGrowth("kharkiv") },
+      odesa: { avg: getAverage("odesa"), growth: getGrowth("odesa") },
+      dnipro: { avg: getAverage("dnipro"), growth: getGrowth("dnipro") },
+      lviv: { avg: getAverage("lviv"), growth: getGrowth("lviv") },
+    };
+  };
+  
+  const handleExportData = async () => {
+    const pdf = new jsPDF();
+    const currentData = getPriceData();
+    const stats = calculateStatistics();
+    
+    // Title
+    pdf.setFontSize(20);
+    pdf.text("Real Estate Market Analytics Report", 14, 20);
+    
+    // Period
+    pdf.setFontSize(12);
+    pdf.text(`Period: ${getTimeRangeLabel()}`, 14, 30);
+    pdf.text(`Generated: ${new Date().toLocaleDateString()}`, 14, 37);
+    
+    // Summary Statistics
+    pdf.setFontSize(16);
+    pdf.text("Summary Statistics", 14, 50);
+    
+    pdf.setFontSize(10);
+    const summaryData = [
+      ["City", "Avg Price per m²", "Price Growth"],
+      ["Kyiv", `₴${stats.kyiv.avg.toLocaleString()}`, `${stats.kyiv.growth}%`],
+      ["Kharkiv", `₴${stats.kharkiv.avg.toLocaleString()}`, `${stats.kharkiv.growth}%`],
+      ["Odesa", `₴${stats.odesa.avg.toLocaleString()}`, `${stats.odesa.growth}%`],
+      ["Dnipro", `₴${stats.dnipro.avg.toLocaleString()}`, `${stats.dnipro.growth}%`],
+      ["Lviv", `₴${stats.lviv.avg.toLocaleString()}`, `${stats.lviv.growth}%`],
+    ];
+    
+    autoTable(pdf, {
+      startY: 55,
+      head: [summaryData[0]],
+      body: summaryData.slice(1),
+      theme: "grid",
+      headStyles: { fillColor: [59, 130, 246] },
+    });
+
+    // Capture chart
+    if (chartRef.current) {
+      try {
+        const canvas = await html2canvas(chartRef.current, {
+          scale: 2,
+          backgroundColor: "#ffffff",
+        });
+        const imgData = canvas.toDataURL("image/png");
+        
+        // @ts-ignore - autoTable adds finalY to jsPDF
+        const yPosition = pdf.lastAutoTable.finalY + 15;
+        
+        pdf.setFontSize(16);
+        pdf.text("Price Trends Chart", 14, yPosition);
+        
+        const imgWidth = 180;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        pdf.addImage(imgData, "PNG", 14, yPosition + 5, imgWidth, imgHeight);
+        
+        // Add page if needed for detailed data
+        pdf.addPage();
+      } catch (error) {
+        console.error("Error capturing chart:", error);
+      }
+    }
+    
+    // Detailed Price Data
+    pdf.setFontSize(16);
+    pdf.text("Detailed Price Data (per m²)", 14, 20);
+    
+    const detailedData = currentData.map(row => [
+      row.month,
+      `₴${row.kyiv.toLocaleString()}`,
+      `₴${row.kharkiv.toLocaleString()}`,
+      `₴${row.odesa.toLocaleString()}`,
+      `₴${row.dnipro.toLocaleString()}`,
+      `₴${row.lviv.toLocaleString()}`,
+    ]);
+    
+    autoTable(pdf, {
+      startY: 25,
+      head: [["Month", "Kyiv", "Kharkiv", "Odesa", "Dnipro", "Lviv"]],
+      body: detailedData,
+      theme: "striped",
+      headStyles: { fillColor: [59, 130, 246] },
+    });
+    
+    // Save PDF
+    pdf.save(`market-analytics-${timeRange}-${new Date().getTime()}.pdf`);
   };
 
   return (
@@ -224,14 +337,15 @@ const Analytics = () => {
                     </Select>
                     <Button variant="outline" size="sm" onClick={handleExportData}>
                       <Download className="h-4 w-4 mr-2" />
-                      Export
+                      Export PDF
                     </Button>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={400}>
-                  <LineChart data={getPriceData()}>
+                <div ref={chartRef}>
+                  <ResponsiveContainer width="100%" height={400}>
+                    <LineChart data={getPriceData()}>
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                     <XAxis dataKey="month" stroke="hsl(var(--muted-foreground))" />
                     <YAxis stroke="hsl(var(--muted-foreground))" />
@@ -243,13 +357,14 @@ const Analytics = () => {
                       }}
                     />
                     <Legend />
-                    <Line type="monotone" dataKey="kyiv" stroke="hsl(var(--chart-1))" strokeWidth={2} name="Kyiv" />
-                    <Line type="monotone" dataKey="kharkiv" stroke="hsl(var(--chart-2))" strokeWidth={2} name="Kharkiv" />
-                    <Line type="monotone" dataKey="odesa" stroke="hsl(var(--chart-3))" strokeWidth={2} name="Odesa" />
-                    <Line type="monotone" dataKey="dnipro" stroke="hsl(var(--chart-4))" strokeWidth={2} name="Dnipro" />
-                    <Line type="monotone" dataKey="lviv" stroke="hsl(var(--chart-5))" strokeWidth={2} name="Lviv" />
-                  </LineChart>
-                </ResponsiveContainer>
+                      <Line type="monotone" dataKey="kyiv" stroke="hsl(var(--chart-1))" strokeWidth={2} name="Kyiv" />
+                      <Line type="monotone" dataKey="kharkiv" stroke="hsl(var(--chart-2))" strokeWidth={2} name="Kharkiv" />
+                      <Line type="monotone" dataKey="odesa" stroke="hsl(var(--chart-3))" strokeWidth={2} name="Odesa" />
+                      <Line type="monotone" dataKey="dnipro" stroke="hsl(var(--chart-4))" strokeWidth={2} name="Dnipro" />
+                      <Line type="monotone" dataKey="lviv" stroke="hsl(var(--chart-5))" strokeWidth={2} name="Lviv" />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
