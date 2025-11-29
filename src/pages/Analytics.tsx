@@ -33,6 +33,21 @@ const distributionData = [
 const COLORS = ["hsl(var(--chart-1))", "hsl(var(--chart-2))", "hsl(var(--chart-3))", "hsl(var(--chart-4))"];
 
 const Analytics = () => {
+  const handleExportData = () => {
+    const csvContent = [
+      ['Month', 'Kyiv', 'Kharkiv', 'Odesa', 'Dnipro', 'Lviv'],
+      ...priceData.map(row => [row.month, row.kyiv, row.kharkiv, row.odesa, row.dnipro, row.lviv])
+    ].map(row => row.join(',')).join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'price-trends.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">
@@ -147,7 +162,7 @@ const Analytics = () => {
                         <SelectItem value="year">Last Year</SelectItem>
                       </SelectContent>
                     </Select>
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" onClick={handleExportData}>
                       <Download className="h-4 w-4 mr-2" />
                       Export
                     </Button>
