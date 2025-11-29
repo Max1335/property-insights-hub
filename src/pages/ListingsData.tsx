@@ -15,7 +15,6 @@ import { useComparison } from "@/contexts/ComparisonContext";
 import property1 from "@/assets/property-1.jpg";
 import property2 from "@/assets/property-2.jpg";
 import property3 from "@/assets/property-3.jpg";
-
 interface Property {
   id: string;
   title: string;
@@ -30,11 +29,13 @@ interface Property {
   property_type: string;
   condition: string;
 }
-
 const images = [property1, property2, property3];
-
 const ListingsData = () => {
-  const { comparisonIds, addToComparison, isInComparison } = useComparison();
+  const {
+    comparisonIds,
+    addToComparison,
+    isInComparison
+  } = useComparison();
   const [showFilters, setShowFilters] = useState(false);
   const [priceRange, setPriceRange] = useState([0, 20000000]);
   const [properties, setProperties] = useState<Property[]>([]);
@@ -54,7 +55,6 @@ const ListingsData = () => {
     const city = params.get('city');
     const type = params.get('type');
     const maxPrice = params.get('maxPrice');
-    
     if (search) {
       setSearchQuery(search);
     }
@@ -68,37 +68,24 @@ const ListingsData = () => {
       setPriceRange([0, parseInt(maxPrice)]);
     }
   }, []);
-
   useEffect(() => {
     fetchProperties();
   }, [selectedCity, selectedType, sortBy, selectedRooms, selectedCondition, minYear, searchQuery]);
-
   const fetchProperties = async () => {
     setLoading(true);
-    
-    let query = supabase
-      .from('properties')
-      .select('*')
-      .eq('status', 'active')
-      .gte('price', priceRange[0])
-      .lte('price', priceRange[1]);
-
+    let query = supabase.from('properties').select('*').eq('status', 'active').gte('price', priceRange[0]).lte('price', priceRange[1]);
     if (selectedCity !== "all") {
       query = query.eq('city', selectedCity);
     }
-
     if (selectedType !== "all") {
       query = query.eq('property_type', selectedType);
     }
-
     if (selectedRooms !== "all") {
       query = query.eq('rooms', parseInt(selectedRooms));
     }
-
     if (selectedCondition !== "all") {
       query = query.eq('condition', selectedCondition);
     }
-
     if (minYear) {
       query = query.gte('building_year', parseInt(minYear));
     }
@@ -111,31 +98,38 @@ const ListingsData = () => {
     // Apply sorting
     switch (sortBy) {
       case "price-asc":
-        query = query.order('price', { ascending: true });
+        query = query.order('price', {
+          ascending: true
+        });
         break;
       case "price-desc":
-        query = query.order('price', { ascending: false });
+        query = query.order('price', {
+          ascending: false
+        });
         break;
       case "area":
-        query = query.order('area', { ascending: false });
+        query = query.order('area', {
+          ascending: false
+        });
         break;
       default:
-        query = query.order('created_at', { ascending: false });
+        query = query.order('created_at', {
+          ascending: false
+        });
     }
-
-    const { data, error } = await query;
-
+    const {
+      data,
+      error
+    } = await query;
     if (!error && data) {
       setProperties(data);
     }
     setLoading(false);
   };
-
   const applyFilters = () => {
     fetchProperties();
     setShowFilters(false);
   };
-
   const resetFilters = () => {
     setSelectedCity("all");
     setSelectedType("all");
@@ -144,16 +138,14 @@ const ListingsData = () => {
     setMinYear("");
     setPriceRange([0, 20000000]);
     setSearchQuery("");
-    
+
     // Clear URL parameters
     window.history.replaceState({}, '', '/listings');
   };
-
-  return (
-    <Layout>
+  return <Layout>
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">Property Listings</h1>
+          <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">Об'єкти нерухомості</h1>
           <p className="text-muted-foreground">
             {searchQuery ? `Search results for "${searchQuery}"` : 'Browse all available properties across Ukrainian cities'}
           </p>
@@ -210,15 +202,7 @@ const ListingsData = () => {
                   
                   <div>
                     <Label className="mb-3 block">Price Range (UAH)</Label>
-                    <Slider
-                      value={priceRange}
-                      onValueChange={setPriceRange}
-                      max={20000000}
-                      min={0}
-                      step={100000}
-                      minStepsBetweenThumbs={1}
-                      className="mb-2"
-                    />
+                    <Slider value={priceRange} onValueChange={setPriceRange} max={20000000} min={0} step={100000} minStepsBetweenThumbs={1} className="mb-2" />
                     <div className="flex justify-between text-sm text-muted-foreground">
                       <span>₴{priceRange[0].toLocaleString()}</span>
                       <span>₴{priceRange[1].toLocaleString()}</span>
@@ -258,13 +242,7 @@ const ListingsData = () => {
 
                   <div>
                     <Label htmlFor="minYear">Built After</Label>
-                    <Input
-                      id="minYear"
-                      type="number"
-                      placeholder="e.g. 2010"
-                      value={minYear}
-                      onChange={(e) => setMinYear(e.target.value)}
-                    />
+                    <Input id="minYear" type="number" placeholder="e.g. 2010" value={minYear} onChange={e => setMinYear(e.target.value)} />
                   </div>
                   
                   <div className="flex gap-2">
@@ -280,26 +258,19 @@ const ListingsData = () => {
           <div className="lg:col-span-3 space-y-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={() => setShowFilters(true)}
-                  className="lg:hidden"
-                >
+                <Button variant="outline" size="sm" onClick={() => setShowFilters(true)} className="lg:hidden">
                   <Filter className="h-4 w-4 mr-2" />
                   Filters
                 </Button>
                 <span className="text-sm text-muted-foreground">
                   {properties.length} properties found
                 </span>
-                {comparisonIds.length > 0 && (
-                  <Link to="/compare">
+                {comparisonIds.length > 0 && <Link to="/compare">
                     <Button variant="default" size="sm">
                       <GitCompare className="h-4 w-4 mr-2" />
                       Compare ({comparisonIds.length})
                     </Button>
-                  </Link>
-                )}
+                  </Link>}
               </div>
               
               <Select value={sortBy} onValueChange={setSortBy}>
@@ -315,25 +286,15 @@ const ListingsData = () => {
               </Select>
             </div>
             
-            {loading ? (
-              <div className="text-center py-12">Loading properties...</div>
-            ) : properties.length === 0 ? (
-              <Card>
+            {loading ? <div className="text-center py-12">Loading properties...</div> : properties.length === 0 ? <Card>
                 <CardContent className="p-12 text-center">
                   <p className="text-muted-foreground">No properties found matching your criteria</p>
                 </CardContent>
-              </Card>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {properties.map((property, index) => (
-                  <Card key={property.id} className="group overflow-hidden hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 border-border h-full">
+              </Card> : <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {properties.map((property, index) => <Card key={property.id} className="group overflow-hidden hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 border-border h-full">
                     <Link to={`/property/${property.id}`}>
                       <div className="relative aspect-[4/3] overflow-hidden">
-                        <img 
-                          src={images[index % images.length]} 
-                          alt={property.title}
-                          className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
-                        />
+                        <img src={images[index % images.length]} alt={property.title} className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" />
                         <Badge variant="default" className="absolute top-4 right-4">
                           {property.property_type}
                         </Badge>
@@ -357,12 +318,10 @@ const ListingsData = () => {
                               <Maximize className="h-4 w-4" />
                               <span>{property.area} m²</span>
                             </div>
-                            {property.rooms && (
-                              <div className="flex items-center gap-1">
+                            {property.rooms && <div className="flex items-center gap-1">
                                 <BedDouble className="h-4 w-4" />
                                 <span>{property.rooms} rooms</span>
-                              </div>
-                            )}
+                              </div>}
                             <span>Floor {property.floor}/{property.total_floors}</span>
                           </div>
                         </div>
@@ -385,25 +344,17 @@ const ListingsData = () => {
                       </div>
                       
                       <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border">
-                        <Checkbox
-                          id={`compare-${property.id}`}
-                          checked={isInComparison(property.id)}
-                          onCheckedChange={() => addToComparison(property.id)}
-                        />
+                        <Checkbox id={`compare-${property.id}`} checked={isInComparison(property.id)} onCheckedChange={() => addToComparison(property.id)} />
                         <Label htmlFor={`compare-${property.id}`} className="text-sm cursor-pointer">
                           Add to compare
                         </Label>
                       </div>
                     </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
+                  </Card>)}
+              </div>}
           </div>
         </div>
       </div>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default ListingsData;
