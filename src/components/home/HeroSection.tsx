@@ -5,6 +5,18 @@ import { Search } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/listings?search=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate('/listings');
+    }
+  };
+
   return (
     <section className="relative overflow-hidden">
       <div 
