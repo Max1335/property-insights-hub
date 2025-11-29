@@ -1,0 +1,146 @@
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { MapPin, Maximize, BedDouble, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import property1 from "@/assets/property-1.jpg";
+import property2 from "@/assets/property-2.jpg";
+import property3 from "@/assets/property-3.jpg";
+
+const featuredProperties = [
+  {
+    id: 1,
+    image: property1,
+    title: "Luxury Penthouse with City View",
+    price: "₴8,500,000",
+    pricePerSqm: "₴65,385",
+    area: "130 m²",
+    rooms: 3,
+    city: "Kyiv",
+    district: "Pechersk",
+    badge: "New",
+    badgeVariant: "default" as const,
+  },
+  {
+    id: 2,
+    image: property2,
+    title: "Modern Office Space in Business Center",
+    price: "₴12,000,000",
+    pricePerSqm: "₴40,000",
+    area: "300 m²",
+    rooms: null,
+    city: "Kyiv",
+    district: "Podil",
+    badge: "Hot",
+    badgeVariant: "destructive" as const,
+  },
+  {
+    id: 3,
+    image: property3,
+    title: "Renovated 2-Room Apartment",
+    price: "₴3,250,000",
+    pricePerSqm: "₴50,000",
+    area: "65 m²",
+    rooms: 2,
+    city: "Lviv",
+    district: "Sykhiv",
+    badge: "Price Drop",
+    badgeVariant: "secondary" as const,
+  },
+];
+
+const FeaturedListings = () => {
+  return (
+    <section className="container mx-auto px-4 py-16 bg-muted/30">
+      <div className="flex items-center justify-between mb-12">
+        <div>
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-2">
+            Featured Properties
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Handpicked listings worth your attention
+          </p>
+        </div>
+        <Link to="/listings">
+          <Button variant="outline" className="hidden md:flex items-center gap-2">
+            View All
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </Link>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {featuredProperties.map((property) => (
+          <Link key={property.id} to={`/property/${property.id}`}>
+            <Card className="group overflow-hidden hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 border-border">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img 
+                  src={property.image} 
+                  alt={property.title}
+                  className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                />
+                <Badge 
+                  variant={property.badgeVariant} 
+                  className="absolute top-4 right-4"
+                >
+                  {property.badge}
+                </Badge>
+              </div>
+              
+              <CardContent className="p-5">
+                <h3 className="font-semibold text-lg mb-3 group-hover:text-primary transition-colors line-clamp-1">
+                  {property.title}
+                </h3>
+                
+                <div className="space-y-2 mb-4">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <MapPin className="h-4 w-4" />
+                    <span>{property.city}, {property.district}</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-1">
+                      <Maximize className="h-4 w-4" />
+                      <span>{property.area}</span>
+                    </div>
+                    {property.rooms && (
+                      <div className="flex items-center gap-1">
+                        <BedDouble className="h-4 w-4" />
+                        <span>{property.rooms} rooms</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                
+                <div className="flex items-baseline justify-between pt-4 border-t border-border">
+                  <div>
+                    <div className="text-2xl font-bold text-foreground">
+                      {property.price}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {property.pricePerSqm}/m²
+                    </div>
+                  </div>
+                  <Button variant="ghost" size="sm" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    View Details
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+        ))}
+      </div>
+      
+      <div className="mt-8 text-center md:hidden">
+        <Link to="/listings">
+          <Button variant="outline" className="w-full">
+            View All Properties
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </Link>
+      </div>
+    </section>
+  );
+};
+
+export default FeaturedListings;
