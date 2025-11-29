@@ -19,6 +19,9 @@ const listingSchema = z.object({
   description: z.string().min(50, "Description must be at least 50 characters"),
   price: z.number().positive("Price must be positive"),
   area: z.number().positive("Area must be positive"),
+  city: z.string().min(1, "City is required"),
+  district: z.string().min(1, "District is required"),
+  address: z.string().min(1, "Address is required"),
 });
 
 const AddListing = () => {
@@ -119,6 +122,9 @@ const AddListing = () => {
         description: formData.description,
         price: parseFloat(formData.price),
         area: parseFloat(formData.area),
+        city: formData.city,
+        district: formData.district,
+        address: formData.address,
       });
 
       setLoading(true);
@@ -317,6 +323,7 @@ const AddListing = () => {
                     value={formData.city}
                     onChange={(e) => setFormData({...formData, city: e.target.value})}
                   />
+                  {errors.city && <p className="text-sm text-destructive mt-1">{errors.city}</p>}
                 </div>
 
                 <div>
@@ -326,6 +333,7 @@ const AddListing = () => {
                     value={formData.district}
                     onChange={(e) => setFormData({...formData, district: e.target.value})}
                   />
+                  {errors.district && <p className="text-sm text-destructive mt-1">{errors.district}</p>}
                 </div>
 
                 <div className="md:col-span-2">
@@ -335,6 +343,7 @@ const AddListing = () => {
                     value={formData.address}
                     onChange={(e) => setFormData({...formData, address: e.target.value})}
                   />
+                  {errors.address && <p className="text-sm text-destructive mt-1">{errors.address}</p>}
                 </div>
               </div>
 
