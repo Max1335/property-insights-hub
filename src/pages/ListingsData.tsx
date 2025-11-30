@@ -147,60 +147,61 @@ const ListingsData = () => {
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-display font-bold mb-2">Об'єкти нерухомості</h1>
           <p className="text-muted-foreground">
-            {searchQuery ? `Search results for "${searchQuery}"` : 'Browse all available properties across Ukrainian cities'}
+            {searchQuery ? `Результати пошуку для "${searchQuery}"` : 'Переглядайте всі доступні об\'єкти нерухомості по всій Україні'}
           </p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Filters Sidebar */}
-          <aside className={`lg:block ${showFilters ? 'block' : 'hidden'}`}>Об'єкти нерухомост<Card className="sticky top-20">
+          <aside className={`lg:block ${showFilters ? 'block' : 'hidden'}`}>
+            <Card className="sticky top-20">
               <CardContent className="p-6 space-y-6">
                 <div className="flex items-center justify-between">
                   <h2 className="font-semibold text-lg flex items-center gap-2">
                     <SlidersHorizontal className="h-5 w-5" />
-                    Filters
+                    Фільтри
                   </h2>
                   <Button variant="ghost" size="sm" onClick={() => setShowFilters(false)} className="lg:hidden">
-                    Close
+                    Закрити
                   </Button>
                 </div>
                 
                 <div className="space-y-4">
                   <div>
-                    <Label className="mb-2 block">City</Label>
+                    <Label className="mb-2 block">Місто</Label>
                     <Select value={selectedCity} onValueChange={setSelectedCity}>
                       <SelectTrigger>
-                        <SelectValue placeholder="All cities" />
+                        <SelectValue placeholder="Всі міста" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All cities</SelectItem>
-                        <SelectItem value="Kyiv">Kyiv</SelectItem>
-                        <SelectItem value="Kharkiv">Kharkiv</SelectItem>
-                        <SelectItem value="Odesa">Odesa</SelectItem>
-                        <SelectItem value="Dnipro">Dnipro</SelectItem>
-                        <SelectItem value="Lviv">Lviv</SelectItem>
+                        <SelectItem value="all">Всі міста</SelectItem>
+                        <SelectItem value="Kyiv">Київ</SelectItem>
+                        <SelectItem value="Kharkiv">Харків</SelectItem>
+                        <SelectItem value="Odesa">Одеса</SelectItem>
+                        <SelectItem value="Dnipro">Дніпро</SelectItem>
+                        <SelectItem value="Lviv">Львів</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   
                   <div>
-                    <Label className="mb-2 block">Property Type</Label>
+                    <Label className="mb-2 block">Тип нерухомості</Label>
                     <Select value={selectedType} onValueChange={setSelectedType}>
                       <SelectTrigger>
-                        <SelectValue placeholder="All types" />
+                        <SelectValue placeholder="Всі типи" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All types</SelectItem>
-                        <SelectItem value="apartment">Apartment</SelectItem>
-                        <SelectItem value="house">House</SelectItem>
-                        <SelectItem value="commercial">Commercial</SelectItem>
-                        <SelectItem value="office">Office</SelectItem>
+                        <SelectItem value="all">Всі типи</SelectItem>
+                        <SelectItem value="apartment">Квартира</SelectItem>
+                        <SelectItem value="house">Будинок</SelectItem>
+                        <SelectItem value="commercial">Комерційна</SelectItem>
+                        <SelectItem value="office">Офіс</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   
                   <div>
-                    <Label className="mb-3 block">Price Range (UAH)</Label>
+                    <Label className="mb-3 block">Діапазон цін (грн)</Label>
                     <Slider value={priceRange} onValueChange={setPriceRange} max={20000000} min={0} step={100000} minStepsBetweenThumbs={1} className="mb-2" />
                     <div className="flex justify-between text-sm text-muted-foreground">
                       <span>₴{priceRange[0].toLocaleString()}</span>
@@ -209,13 +210,13 @@ const ListingsData = () => {
                   </div>
 
                   <div>
-                    <Label>Rooms</Label>
+                    <Label>Кімнат</Label>
                     <Select value={selectedRooms} onValueChange={setSelectedRooms}>
                       <SelectTrigger>
-                        <SelectValue placeholder="All" />
+                        <SelectValue placeholder="Всі" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All</SelectItem>
+                        <SelectItem value="all">Всі</SelectItem>
                         <SelectItem value="1">1</SelectItem>
                         <SelectItem value="2">2</SelectItem>
                         <SelectItem value="3">3</SelectItem>
@@ -225,28 +226,28 @@ const ListingsData = () => {
                   </div>
 
                   <div>
-                    <Label>Condition</Label>
+                    <Label>Стан</Label>
                     <Select value={selectedCondition} onValueChange={setSelectedCondition}>
                       <SelectTrigger>
-                        <SelectValue placeholder="All" />
+                        <SelectValue placeholder="Всі" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All</SelectItem>
-                        <SelectItem value="new">New</SelectItem>
-                        <SelectItem value="renovated">Renovated</SelectItem>
-                        <SelectItem value="good">Good</SelectItem>
+                        <SelectItem value="all">Всі</SelectItem>
+                        <SelectItem value="new">Новобудова</SelectItem>
+                        <SelectItem value="renovated">Відремонтована</SelectItem>
+                        <SelectItem value="good">Хороший стан</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   <div>
-                    <Label htmlFor="minYear">Built After</Label>
-                    <Input id="minYear" type="number" placeholder="e.g. 2010" value={minYear} onChange={e => setMinYear(e.target.value)} />
+                    <Label htmlFor="minYear">Побудовано після</Label>
+                    <Input id="minYear" type="number" placeholder="напр. 2010" value={minYear} onChange={e => setMinYear(e.target.value)} />
                   </div>
                   
                   <div className="flex gap-2">
-                    <Button className="flex-1" onClick={applyFilters}>Apply Filters</Button>
-                    <Button variant="outline" onClick={resetFilters}>Reset</Button>
+                    <Button className="flex-1" onClick={applyFilters}>Застосувати</Button>
+                    <Button variant="outline" onClick={resetFilters}>Скинути</Button>
                   </div>
                 </div>
               </CardContent>
@@ -259,15 +260,15 @@ const ListingsData = () => {
               <div className="flex items-center gap-4">
                 <Button variant="outline" size="sm" onClick={() => setShowFilters(true)} className="lg:hidden">
                   <Filter className="h-4 w-4 mr-2" />
-                  Filters
+                  Фільтри
                 </Button>
                 <span className="text-sm text-muted-foreground">
-                  {properties.length} properties found
+                  Знайдено {properties.length} об'єктів
                 </span>
                 {comparisonIds.length > 0 && <Link to="/compare">
                     <Button variant="default" size="sm">
                       <GitCompare className="h-4 w-4 mr-2" />
-                      Compare ({comparisonIds.length})
+                      Порівняти ({comparisonIds.length})
                     </Button>
                   </Link>}
               </div>
@@ -277,17 +278,17 @@ const ListingsData = () => {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="date">Newest First</SelectItem>
-                  <SelectItem value="price-asc">Price: Low to High</SelectItem>
-                  <SelectItem value="price-desc">Price: High to Low</SelectItem>
-                  <SelectItem value="area">Area</SelectItem>
+                  <SelectItem value="date">Найновіші</SelectItem>
+                  <SelectItem value="price-asc">Ціна: за зростанням</SelectItem>
+                  <SelectItem value="price-desc">Ціна: за спаданням</SelectItem>
+                  <SelectItem value="area">Площа</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             
-            {loading ? <div className="text-center py-12">Loading properties...</div> : properties.length === 0 ? <Card>
+            {loading ? <div className="text-center py-12">Завантаження об'єктів...</div> : properties.length === 0 ? <Card>
                 <CardContent className="p-12 text-center">
-                  <p className="text-muted-foreground">No properties found matching your criteria</p>
+                  <p className="text-muted-foreground">Не знайдено об'єктів за вашими критеріями</p>
                 </CardContent>
               </Card> : <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {properties.map((property, index) => <Card key={property.id} className="group overflow-hidden hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 border-border h-full">
@@ -319,7 +320,7 @@ const ListingsData = () => {
                             </div>
                             {property.rooms && <div className="flex items-center gap-1">
                                 <BedDouble className="h-4 w-4" />
-                                <span>{property.rooms} rooms</span>
+                                <span>{property.rooms} кімн</span>
                               </div>}
                             <span>Floor {property.floor}/{property.total_floors}</span>
                           </div>
@@ -337,7 +338,7 @@ const ListingsData = () => {
                         </div>
                         <Link to={`/property/${property.id}`}>
                           <Button variant="ghost" size="sm" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                            Details
+                            Детальніше
                           </Button>
                         </Link>
                       </div>
@@ -345,7 +346,7 @@ const ListingsData = () => {
                       <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border">
                         <Checkbox id={`compare-${property.id}`} checked={isInComparison(property.id)} onCheckedChange={() => addToComparison(property.id)} />
                         <Label htmlFor={`compare-${property.id}`} className="text-sm cursor-pointer">
-                          Add to compare
+                          Додати до порівняння
                         </Label>
                       </div>
                     </CardContent>
