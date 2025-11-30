@@ -24,7 +24,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <Link to="/" className="flex items-center gap-2 font-bold text-xl">
             <Building2 className="h-6 w-6 text-primary" />
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent font-display">
-              Аналітика Нерухомості
+              Propmind
             </span>
           </Link>
           
