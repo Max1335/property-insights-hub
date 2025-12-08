@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
@@ -144,8 +144,8 @@ const Compare = () => {
 
               {/* Comparison rows */}
               {compareFields.map((field) => (
-                <>
-                  <div key={`label-${field.key}`} className="flex items-center p-4 bg-muted/50 rounded-lg font-medium">
+                <React.Fragment key={field.key}>
+                  <div className="flex items-center p-4 bg-muted/50 rounded-lg font-medium">
                     {field.label}
                   </div>
                   {properties.map((property) => (
@@ -153,7 +153,7 @@ const Compare = () => {
                       {field.format((property as any)[field.key], property)}
                     </div>
                   ))}
-                </>
+                </React.Fragment>
               ))}
             </div>
           </div>
