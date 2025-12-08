@@ -47,7 +47,7 @@ const FeaturedListingsData = () => {
   };
 
   if (loading) {
-    return <div className="text-center py-8">Loading properties...</div>;
+    return <div className="text-center py-8">Завантаження оголошень...</div>;
   }
 
   return (
@@ -55,15 +55,15 @@ const FeaturedListingsData = () => {
       <div className="flex items-center justify-between mb-12">
         <div>
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-2">
-            Featured Properties
+            Рекомендовані об'єкти
           </h2>
           <p className="text-lg text-muted-foreground">
-            Handpicked listings worth your attention
+            Найкращі пропозиції, варті вашої уваги
           </p>
         </div>
         <Link to="/listings">
           <Button variant="outline" className="hidden md:flex items-center gap-2">
-            View All
+            Переглянути всі
             <ArrowRight className="h-4 w-4" />
           </Button>
         </Link>
@@ -98,12 +98,12 @@ const FeaturedListingsData = () => {
                   <div className="flex items-center gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                       <Maximize className="h-4 w-4" />
-                      <span>{property.area} m²</span>
+                      <span>{property.area} м²</span>
                     </div>
                     {property.rooms && (
                       <div className="flex items-center gap-1">
                         <BedDouble className="h-4 w-4" />
-                        <span>{property.rooms} rooms</span>
+                        <span>{property.rooms} кімнат</span>
                       </div>
                     )}
                   </div>
@@ -115,11 +115,11 @@ const FeaturedListingsData = () => {
                       ₴{property.price.toLocaleString()}
                     </div>
                     <div className="text-xs text-muted-foreground">
-                      ₴{property.price_per_sqm?.toLocaleString()}/m²
+                      ₴{property.price_per_sqm?.toLocaleString()}/м²
                     </div>
                   </div>
                   <Button variant="ghost" size="sm" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                    View Details
+                    Детальніше
                   </Button>
                 </div>
               </CardContent>
@@ -131,7 +131,7 @@ const FeaturedListingsData = () => {
       <div className="mt-8 text-center md:hidden">
         <Link to="/listings">
           <Button variant="outline" className="w-full">
-            View All Properties
+            Переглянути всі об'єкти
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </Link>
