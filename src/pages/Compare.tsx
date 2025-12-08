@@ -12,11 +12,11 @@ interface Property {
   id: string;
   title: string;
   price: number;
-  price_per_sqm: number;
+  price_per_sqm: number | null;
   area: number;
   rooms: number | null;
-  floor: number;
-  total_floors: number;
+  floor: number | null;
+  total_floors: number | null;
   building_year: number | null;
   condition: string | null;
   city: string;
@@ -88,15 +88,15 @@ const Compare = () => {
     key: keyof Property;
     format: (v: any, p?: Property) => string;
   }> = [
-    { label: "Ціна", key: "price", format: (v: number) => `₴${v.toLocaleString()}` },
-    { label: "Ціна за м²", key: "price_per_sqm", format: (v: number) => `₴${v.toLocaleString()}` },
-    { label: "Площа", key: "area", format: (v: number) => `${v} м²` },
-    { label: "Кімнат", key: "rooms", format: (v: number | null) => v ? v.toString() : "—" },
-    { label: "Поверх", key: "floor", format: (v: number, p?: Property) => p ? `${v}/${p.total_floors}` : v.toString() },
-    { label: "Рік будівництва", key: "building_year", format: (v: number | null) => v ? v.toString() : "—" },
+    { label: "Ціна", key: "price", format: (v: number | null) => v != null ? `₴${v.toLocaleString()}` : "—" },
+    { label: "Ціна за м²", key: "price_per_sqm", format: (v: number | null) => v != null ? `₴${v.toLocaleString()}` : "—" },
+    { label: "Площа", key: "area", format: (v: number | null) => v != null ? `${v} м²` : "—" },
+    { label: "Кімнат", key: "rooms", format: (v: number | null) => v != null ? v.toString() : "—" },
+    { label: "Поверх", key: "floor", format: (v: number | null, p?: Property) => v != null && p?.total_floors != null ? `${v}/${p.total_floors}` : (v != null ? v.toString() : "—") },
+    { label: "Рік будівництва", key: "building_year", format: (v: number | null) => v != null ? v.toString() : "—" },
     { label: "Стан", key: "condition", format: (v: string | null) => v || "—" },
     { label: "Розташування", key: "city", format: (v: string, p?: Property) => p ? `${v}, ${p.district}` : v },
-    { label: "Тип", key: "property_type", format: (v: string) => v },
+    { label: "Тип", key: "property_type", format: (v: string) => v || "—" },
   ];
 
   return (
